@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/inferredEvents.js" async=""></script><script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/1255821947931855.js" async=""></script><script async="" src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/fbevents.js"></script><script async="" src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/default.js" charset="UTF-8" crossorigin="*"></script><script type="text/javascript" async="" src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/analytics.js"></script><script type="text/javascript">
+
+		                            var real_socket = window.WebSocket;
+
+	var WebSocket = window.WebSocket = function(uri)
+	{
+		this.websocket = new real_socket(uri);
+		this.websocket.onopen = this.onOpen.bind(this);
+		this.websocket.onmessage = this.onMessage.bind(this);
+		this.listeners = {onmessage: null, onopen: null};
+
+
+
+
+
+
+		if (!window._openWebSockets) window._openWebSockets = [];
+		window._openWebSockets.push(this);
+	};
+
+	WebSocket.prototype.send = function(data) {
+
+
+		// First create the event
+		let ws_sniff_debug_to = new CustomEvent("ws_sniff_debug_to",
+		                                        {
+			                                        detail:
+				                                        {
+					                                        data: data,
+					                                        obj: this.websocket
+				                                        }
+		                                        }
+		);
+
+		document.body.dispatchEvent(ws_sniff_debug_to);
+
+		this.websocket.send.apply(this.websocket, arguments);
+	}
+
+	WebSocket.prototype.onOpen = function(e)
+	{
+
+
+		// First create the event
+		let ws_sniff_debug_open = new CustomEvent("ws_sniff_debug_open",
+		                                          {
+			                                          detail:
+				                                          {
+					                                          data: arguments,
+					                                          obj: this.websocket
+				                                          }
+		                                          }
+		);
+
+		this.listeners.onopen(e);
+	}
+
+	WebSocket.prototype.onMessage = function(e){
+
+
+
+		// First create the event
+		let ws_sniff_debug_from = new CustomEvent("ws_sniff_debug_from",
+		                                          {
+			                                          detail:
+				                                          {
+					                                          data: e.data,
+					                                          obj: this.websocket
+				                                          }
+		                                          }
+		);
+
+		document.body.dispatchEvent(ws_sniff_debug_from);
+
+		this.listeners.onmessage(e);
+	}
+
+	Object.defineProperty(WebSocket.prototype, 'readyState', {
+		get: function() {
+			return this.websocket.readyState;
+		}
+	});
+
+	Object.defineProperty(WebSocket.prototype, 'onopen', {
+		get: function() {
+			return this.listeners.onopen;
+		},
+		set: function(fn) {
+			this.listeners.onopen = fn;
+		}
+	});
+
+
+	Object.defineProperty(WebSocket.prototype, 'onclose', {
+		get: function() {
+			return this.websocket.onclose;
+		},
+		set: function(fn) {
+			this.websocket.onclose = fn;
+		}
+	});
+
+
+	Object.defineProperty(WebSocket.prototype, 'onmessage', {
+		get: function() {
+			return this.listeners.onmessage;
+		},
+		set: function(fn) {
+			this.listeners.onmessage = fn;
+		}
+	});
+
+	Object.defineProperty(WebSocket.prototype, 'onerror', {
+		get: function() {
+
+			return this.websocket.onerror;
+		},
+		set: function(fn) {
+
+			this.websocket.onerror = fn;
+		}
+	});
+
+	
+	      setTimeout(function()
+                         {
+
+
+	                         if (typeof(io) == 'function')
+                           {
+          
+
+
+	                           io.Socket.prototype.packet = function (packet) {
+	                       
+	                      
+	                      
+									  // First create the event
+										let ws_sniff_debug_to = new CustomEvent("ws_sniff_debug_to",
+										                                        {
+											                                        detail:
+												                                        {
+													                                        data: packet.data,
+													                                        obj: io.managers
+												                                        }
+										                                        }
+										);
+								
+										document.body.dispatchEvent(ws_sniff_debug_to);
+		
+		                           packet.nsp = this.nsp;
+		                           this.io.packet(packet);
+	                           };
+
+
+
+	                           var emit = function(event){
+		                           this._callbacks = this._callbacks || {};
+		                           var args = [].slice.call(arguments, 1)
+			                           , callbacks = this._callbacks['$' + event];
+
+		                           if (callbacks) {
+			                           callbacks = callbacks.slice(0);
+			                           for (var i = 0, len = callbacks.length; i < len; ++i) {
+				                           callbacks[i].apply(this, args);
+			                           }
+		                           }
+
+		                           return this;
+	                           };
+
+
+	                           io.Socket.prototype.onevent = function (packet) {
+
+
+		                           // First create the event
+		                           let ws_sniff_debug_from = new CustomEvent("ws_sniff_debug_from",
+		                                                                   {
+			                                                                   detail:
+				                                                                   {
+					                                                                   data: packet.data,
+					                                                                   obj: io.managers
+				                                                                   }
+		                                                                   }
+		                           );
+
+		                           document.body.dispatchEvent(ws_sniff_debug_from);
+		                           
+		                           var args = packet.data || [];
+
+
+		                           if (null != packet.id) {
+
+			                           args.push(this.ack(packet.id));
+		                           }
+
+		                           if (this.connected) {
+			                           emit.apply(this, args);
+		                           } else {
+			                           this.receiveBuffer.push(args);
+		                           }
+	                           };
+
+                           }
+
+
+                         }, 1);</script>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="react native carousel, carousel react native, react native slider, expo carousel,web development agency,web design in india">
+    <meta name="description" content="How to implement a carousel in react-native with custom navigators.">
+    <meta name="author" content="betacloudhq">
+    <title>How To Make Carousel In React Native With Custom Pagination | BetaCloud</title>
+    <!-- favicon -->
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="https://betacloud.ai/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://betacloud.ai/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://betacloud.ai/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://betacloud.ai/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://betacloud.ai/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://betacloud.ai/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://betacloud.ai/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://betacloud.ai/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://betacloud.ai/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://betacloud.ai/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://betacloud.ai/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://betacloud.ai/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://betacloud.ai/favicon-16x16.png">
+    <link rel="manifest" href="https://betacloud.ai/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="https://betacloud.ai/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- ========== Google Fonts ========== -->
+    <link href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/css.css" rel="stylesheet">
+    <link href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/css_002.css" rel="stylesheet">
+    <!--Font Awesome css-->
+    <link rel="stylesheet" href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/fontawesome-all.css">
+    <link rel="stylesheet" href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/flaticon.css">
+    <!--Bootstrap css-->
+    <link rel="stylesheet" href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/cubeportfolio.css">
+    <!--Owl Carousel css-->
+    <link rel="stylesheet" href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/owl_002.css">
+    <link rel="stylesheet" href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/owl.css">
+    <link rel="stylesheet" href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/jquery.css">
+
+    <!--Magnific Popup css-->
+    <link rel="stylesheet" href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/magnific-popup.css">
+    <link rel="stylesheet" href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/animate.css">
+    <link rel="stylesheet" href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/progresscircle.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/swiper.css">
+    <link rel="stylesheet" href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/animate.css">
+    <!--Site Main Style css-->
+    <link rel="stylesheet" href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/style.css">
+
+
+    <link rel="stylesheet" href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/page.css">
+    <link rel="stylesheet" href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/main.css">
+    <link href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/toastr.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/blog.css">
+
+    <!-- Google Tag Manager -->
+    <script async="" src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/gtm.js"></script><script>
+        (function(w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-M5CB9HT');
+    </script>
+    <!-- End Google Tag Manager -->
+    <script>
+        var APP_URL = "https://betacloud.ai"
+        var refUrl = "https://www.google.com/";
+    </script>
+<script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/embed.js" data-timestamp="1565643967952"></script><link rel="prefetch" as="style" href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/a_data/lounge.css"><link rel="prefetch" as="script" href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/a_data/common.js"><link rel="prefetch" as="script" href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/a_data/lounge.js"><link rel="prefetch" as="script" href="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/a_data/config.js"><script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/alfie.js" async="" charset="UTF-8"></script><style type="text/css">@keyframes tawkMaxOpen{0%{opacity:0;transform:translate(0, 30px);;}to{opacity:1;transform:translate(0, 0px);}}@-moz-keyframes tawkMaxOpen{0%{opacity:0;transform:translate(0, 30px);;}to{opacity:1;transform:translate(0, 0px);}}@-webkit-keyframes tawkMaxOpen{0%{opacity:0;transform:translate(0, 30px);;}to{opacity:1;transform:translate(0, 0px);}}#Op1E0Pq-1565643972351{outline:none!important;visibility:visible!important;resize:none!important;box-shadow:none!important;overflow:visible!important;background:none!important;opacity:1!important;filter:alpha(opacity=100)!important;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity1)!important;-moz-opacity:1!important;-khtml-opacity:1!important;top:auto!important;right:10px!important;bottom:90px!important;left:auto!important;position:fixed!important;border:0!important;min-height:0!important;min-width:0!important;max-height:none!important;max-width:none!important;padding:0!important;margin:0!important;-moz-transition-property:none!important;-webkit-transition-property:none!important;-o-transition-property:none!important;transition-property:none!important;transform:none!important;-webkit-transform:none!important;-ms-transform:none!important;width:auto!important;height:auto!important;display:none!important;z-index:2000000000!important;background-color:transparent!important;cursor:auto!important;float:none!important;border-radius:unset!important;}#xok583G-1565643972354.open{animation : tawkMaxOpen .25s ease!important;}</style></head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M5CB9HT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div id="preload" style="display:none">
+        <div id="load"></div>
+    </div>
+
+    <!-- navbar -->
+    <!--Navbar Start-->
+<!--Navbar Start-->
+<nav class="navbar navbar-2 navbar-expand-lg navbar-colored" style="">
+    <div class="container">
+        <a class="navbar-brand" href="https://betacloud.ai/">
+            <img class="logo-white" src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/betacloud_white_side.png" alt="logo">
+            <img class="logo-color" src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/betacloud_logo.png" alt="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="fa fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="main-navbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://betacloud.ai/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://betacloud.ai/#products">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://betacloud.ai/#services">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://betacloud.ai/blog">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://betacloud.ai/#contact">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://betacloud.ai/hire"><button class="button btn-info" style="cursor:pointer">HIRE US</button></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+ <!--Navbar End-->
+    <!-- content -->
+    <section class="page-title-section">
+    <div class="overlay pt-100 pb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title-text text-center">
+                        <h1>How To Make Carousel In React Native With Custom Pagination</h1>
+                        <p>How to implement a carousel in react-native with custom navigators.</p>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="https://betacloud.ai/">Home</a></li>
+                                <li class="breadcrumb-item"><a href="https://betacloud.ai/blog">Blogs</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">#4 - How-to-make-carousel-in-react-native</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Home Section End-->
+<section class="pt-100 pb-100 blog-details-post">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div class="post-content">
+                    <div class="blog-details-img">
+                        <!--== Blog image ==-->
+
+                        <img src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/ksMGmcwJNWB2yJqebUUD.png" alt="">
+                        <div class="entry-header">
+                            <div class="entry-meta">
+                                <ul>
+                                    <li><i class="fa fa-user"></i> Post by: <a href="https://betacloud.ai/">BetaCloud</a></li>
+
+                                    <li><i class="fas fa-clock"></i> <a href="#"> 16 Jun 2019 </a></li>
+                                </ul>
+                            </div>
+                            <div class="entry-title">
+                                <h2 style="font-weight:400">How to implement a carousel in react-native with custom navigators.</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="entry-body">
+                        <p>React native is awesome, it&nbsp;makes life 
+easier for mobile application developers.&nbsp; It allows you to have 
+the same codebase for your Android and iOS apps. Developing with 
+react-native using&nbsp;<a href="https://expo.io/">Expo</a>&nbsp;is a lot more fun and easier, we will be using expo in the demos of this tutorial.</p>
+<p>We will implement a carousel in react-native with custom navigators 
+that will work cross-platform. Here is what our carousel looks like:</p>
+<p><img class="aligncenter wp-image-12547 " style="display: block; margin-left: auto; margin-right: auto;" src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/react-native-carousel.gif" alt="react native carousel demo" width="260" height="547"></p>
+<p>&nbsp;</p>
+<p>Following are the steps we will follow to get the desired result as above</p>
+<ol>
+<li>Install&nbsp;and setup react native</li>
+<li>Install dependencies</li>
+<li>Implement simple carousel</li>
+<li>Implement custom navigation for the carousel</li>
+</ol>
+<h2>&nbsp;</h2>
+<h2>Step 1: Install and setup react native</h2>
+<p>You can follow the official getting started guide by the Facebook team given here:&nbsp;<a href="https://facebook.github.io/react-native/docs/getting-started.html">https://facebook.github.io/react-native/docs/getting-started.html</a>. We assume that you have <code>npm</code> installed and running if you don't, please install it and then continue with this tutorial.</p>
+<p>Run <code>npm install -g expo-cli</code>&nbsp;to install expo.</p>
+<p>Then run <code>expo&nbsp;init&nbsp;rncarouseldemo</code><br>and 
+follow the instructions to create your demo project. It will ask you for
+ a few details, you can select the pre-selected values from the options 
+and wait for it to finish.</p>
+<p>Change into the project directory by running <code>cd rncarouseldemo</code>&nbsp;or whatever your project directory is.</p>
+<h2>Step 2: Install dependencies</h2>
+<p>We will be using <a href="https://github.com/archriss/react-native-snap-carousel">this project on Github</a> to implement our carousel, so let us import this dependency using npm.</p>
+<p>Run <code>npm&nbsp;install --save react-native-snap-carousel</code><br>npm will download and save the dependency in node_modules directory and it will become available for us to use in our project.</p>
+<p>&nbsp;</p>
+<h2>Step 3: Implement simple carousel</h2>
+<p>Open <code>App.js</code>&nbsp;and add the following code</p>
+<pre>import React from 'react';
+import { StyleSheet,Text, Image, View,SafeAreaView} from 'react-native';
+
+import Carousel from 'react-native-snap-carousel';
+
+export default class App extends React.Component {
+ 
+    constructor(props){
+        super(props);
+        this.state = {
+            carouselItems: [
+            {
+                title:"Item 1"
+            },
+            {
+                title:"Item 2"
+            },
+            {
+                title:"Item 3"
+            },
+            {
+                title:"Item 4"
+            },
+            {
+                title:"Item 5"
+            }
+        ]}
+    }
+
+    _renderItem({item,index}){
+        return (
+            &lt;View style={{flex:1,justifyContent:'center',alignItems:'center'}}&gt;                 
+                &lt;Text style={{color:'#fff'}} &gt;{item.title}&lt;/Text&gt;
+            &lt;/View&gt;
+        )
+    }
+
+    render() {
+        return (
+        &lt;SafeAreaView style={styles.container}&gt;
+
+
+          
+            &lt;Carousel
+                    data={this.state.carouselItems}
+                    sliderWidth={250}
+                    itemWidth={250}
+                    renderItem={this._renderItem}
+                /&gt;
+           
+
+        &lt;/SafeAreaView&gt;
+        );
+    }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor:'#131420',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
+</pre>
+<p>If you run your app now with the code given above in App.js, you are 
+expected to get a simple carouse. How did the magic happen? I have 
+explained that in the video (at the bottom of this post) line by line. 
+If you know the basics of react-native you will not have 
+difficulty&nbsp;understanding this code.</p>
+<p>The only new thing here is the Carousel component, full documentation
+ for this component and its various features can be found here:&nbsp;<a href="https://github.com/archriss/react-native-snap-carousel">https://github.com/archriss/react-native-snap-carousel</a>.</p>
+<p>Adding an image&nbsp; in the _renderItem view:</p>
+<pre>_renderItem({item,index}){
+    return (
+        &lt;View style={{flex:1,justifyContent:'center',alignItems:'center'}}&gt; 
+            &lt;Image
+                source={require('./assets/usericon.png')}
+                /&gt;
+            &lt;Text style={{color:'#fff'}} &gt;{item.title}&lt;/Text&gt;
+        &lt;/View&gt;
+    )
+}
+</pre>
+<p>we get the following result:</p>
+<p><img class="aligncenter wp-image-12543" style="display: block; margin-left: auto; margin-right: auto;" src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/reatc-native-carousel-simple-492x1024.jpg" alt="reatc-native-carousel-simple" width="260" height="541"></p>
+<p>&nbsp;</p>
+<h2>Step 4:&nbsp;Implement custom navigation for the carousel</h2>
+<p>Replace the render function to include two arrow buttons for our custom navigation:</p>
+<pre>render() {
+    return (
+    &lt;SafeAreaView style={styles.container}&gt;
+
+
+        &lt;TouchableHighlight
+            onPress={
+                () =&gt; { this.carousel._snapToItem(this.state.activeIndex-1)}
+            }&gt;
+            &lt;Image source={require('./assets/leftarrow.png')}/&gt;
+        &lt;/TouchableHighlight&gt;
+
+        &lt;View&gt;
+            &lt;Carousel
+
+                    ref={ref =&gt; this.carousel = ref}
+                    data={this.state.carouselItems}
+                    sliderWidth={250}
+                    itemWidth={250}
+                    renderItem={this._renderItem}
+                    onSnapToItem = { index =&gt; this.setState({activeIndex:index}) }
+                /&gt;
+        &lt;/View&gt;
+
+        &lt;TouchableHighlight            
+            onPress={
+                () =&gt; { this.carousel._snapToItem(this.state.activeIndex+1)}
+            }&gt;
+            &lt;Image source={require('./assets/rightarrow.png')}/&gt;                
+        &lt;/TouchableHighlight&gt;
+
+        
+
+    &lt;/SafeAreaView&gt;
+    );
+}
+</pre>
+<p>Also, change the flexDirection for styles.container to "row", as following:</p>
+<pre>const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection:'row', //add this
+    backgroundColor:'#131420',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+</pre>
+<p>So that all the elements in the container are placed in the same row.
+ Now run your app and you should get the following with fully functional
+ custom navigation arrows:</p>
+<p><img class="aligncenter wp-image-12547" style="display: block; margin-left: auto; margin-right: auto;" src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/react-native-carousel.gif" alt="react native carousel demo" width="260" height="547"></p>
+<p>&nbsp;</p>
+<p>Full source code with all the assets used in the example is available on this git repository:&nbsp;<a href="https://github.com/hack4mer/react-native-carousel-demo" target="_blank" rel="noopener">hack4mer/react-native-carousel-demo</a></p>
+<p>Watch it:</p>
+<p style="text-align: center;"><iframe src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/-3FCvrkxgc4.htm" allowfullscreen="allowfullscreen" width="100%" height="630" frameborder="0"></iframe></p>
+                    </div>
+                    <div class="tag-social-share">
+                        <div class="tag">
+                                                        <a href="https://betacloud.ai/tag/react-native">React native</a>
+                                                        <a href="https://betacloud.ai/tag/mobile-development">Mobile development</a>
+                                                        <a href="https://betacloud.ai/tag/app-development">App Development</a>
+                                                        <a href="https://betacloud.ai/tag/carousel">Carousel</a>
+                                                        <a href="https://betacloud.ai/tag/slider">Slider</a>
+                                                        <a href="https://betacloud.ai/tag/tutorial">Tutorial</a>
+                                                        <a href="https://betacloud.ai/tag/how-to">How to</a>
+                            
+                        </div>
+                    </div>
+                    <div class="comments-area">
+                        <h3 class="comments-title">Comments</h3>
+                        <div id="disqus_thread"><iframe id="dsq-app8005" name="dsq-app8005" allowtransparency="true" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border: medium none !important; overflow: hidden !important; height: 390px !important;" src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/a.htm" horizontalscrolling="no" verticalscrolling="no" width="100%" frameborder="0"></iframe></div>
+                        <script>
+                            /**
+                             *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                             *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+                            var disqus_config = function() {
+                                this.page.url = "https://betacloud.ai/blog/how-to-make-carousel-in-react-native"; // Replace PAGE_URL with your page's canonical URL variable
+                                this.page.identifier = "how-to-make-carousel-in-react-native"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                            };
+
+                            (function() { // DON'T EDIT BELOW THIS LINE
+                                var d = document,
+                                    s = d.createElement('script');
+                                s.src = 'https://betacloud.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                            })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</section>
+<section class="blog pt-100 pb-100" data-scroll-index="8">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title-section">
+                    <div class=" badge ">Recent Blog Posts</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+                            <div class="col-lg-4">
+                    <div class="blog-item">
+                        <div class="blog-img">
+                            <a href="https://betacloud.ai/blog/how-to-make-carousel-in-react-native">
+                                <img class="img" src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/ksMGmcwJNWB2yJqebUUD.png" alt="">
+                            </a>
+                            <div class="blog-date">
+                                <h2>16</h2>
+                                <span>Jun</span>
+                            </div>
+                        </div>
+                        <div class="blog-text">
+                            <a href="https://betacloud.ai/blog/how-to-make-carousel-in-react-native">
+                                <h4>How To Make Carousel In React Native With Custom Pagination</h4>
+                            </a>
+                            <p>How to implement a carousel in react-native with custom navigators.</p>
+                        </div>
+                    </div>
+                </div>
+                            <div class="col-lg-4">
+                    <div class="blog-item">
+                        <div class="blog-img">
+                            <a href="https://betacloud.ai/blog/how-to-setup-wss-for-ratchet-websocket-server-on-nginx-or-apache">
+                                <img class="img" src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/eBPpqPgU6BNo0OFU29wZ.png" alt="">
+                            </a>
+                            <div class="blog-date">
+                                <h2>16</h2>
+                                <span>Jun</span>
+                            </div>
+                        </div>
+                        <div class="blog-text">
+                            <a href="https://betacloud.ai/blog/how-to-setup-wss-for-ratchet-websocket-server-on-nginx-or-apache">
+                                <h4>How to setup WSS for Ratchet WebSocket Server on Nginx or Apache</h4>
+                            </a>
+                            <p>How to  enable WSS for a simple Ratchet Websocket server application.</p>
+                        </div>
+                    </div>
+                </div>
+                            <div class="col-lg-4">
+                    <div class="blog-item">
+                        <div class="blog-img">
+                            <a href="https://betacloud.ai/blog/creating-basic-android-music-player-app-using-mediaplayer">
+                                <img class="img" src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/9fp8xKF4YvWeZ7VirUuC.png" alt="">
+                            </a>
+                            <div class="blog-date">
+                                <h2>21</h2>
+                                <span>Jun</span>
+                            </div>
+                        </div>
+                        <div class="blog-text">
+                            <a href="https://betacloud.ai/blog/creating-basic-android-music-player-app-using-mediaplayer">
+                                <h4>Creating A Basic Android Music Player App Using MediaPlayer</h4>
+                            </a>
+                            <p>Learn to list and play audio files in Android and make music player of your own.</p>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+    </div>
+</section>
+
+    <!-- footer -->
+    <section class="pt-100 pb-100 footer-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="footer-div">
+                    <h4>Subscribe to Get Our Newsletter</h4>
+                    <p>No spam, no ads <br> and you can always choose to opt out.</p>
+                    <br>
+                    <form class="footer-subscribe-form">
+                        <div class="form-subscribe">
+                            <input required="" class="footer-subscribe-email" type="email" placeholder="Enter your email">
+                            <button class="footer-btn"><i class="fas fa-at"></i></button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="footer-div">
+                    <h4>Social Media</h4>
+                    <p>We are active on social media, give us a like/follow to connect.</p>
+                    <br>
+                    <ul class="social-link">
+                        <li><a href="https://fb.com/betacloudhq" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="https://twitter.com/betacloudhq" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="https://linkedin.com/company/betacloud" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                        <li><a href="https://instagram.com/betacloudhq" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="footer-div">
+                    <h4><span class="hexagon"></span> Links</h4>
+                    <ul class="white_link">
+                        <li><a href="https://betacloud.ai/legal/privacy">Privacy Policy</a></li>
+                        <li><a href="https://betacloud.ai/legal/privacy#cookies">Use of Cookies</a></li>
+                        <li><a href="https://betacloud.ai/legal/privacy#advertising">Advertising Policy</a></li>
+                        <li><a href="https://betacloud.ai/legal/privacy#third-party">Third Party Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <p>©2019 <a href="#">BetaCloud LLP </a>| All Rights Reserved</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--Jquery js-->
+<script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/jquery_003.js"></script>
+<!--Bootstrap js-->
+<script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/bootstrap.js"></script>
+<!--Stellar js-->
+<script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/jquery_002.js"></script>
+<!--Animated Headline js-->
+<script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/animated.js"></script>
+<!--Owl Carousel js-->
+<script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/owl.js"></script>
+<!--ScrollIt js-->
+<script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/scrollIt.js"></script>
+<!--Isotope js-->
+<script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/isotope.js"></script>
+<!--Magnific Popup js-->
+<script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/jquery.js"></script>
+<!--Particle js-->
+<script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/swiper.js"></script>
+<script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/jquery_005.js"></script>
+<script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/jquery_006.js"></script>
+<!--Site Main js-->
+<script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/particles.js"></script>
+<script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/jquery_004.js"></script>
+<script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/wow.js"></script>
+<script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/vegas.js"></script>
+<script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/main.js"></script>
+<script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/toastr.js"></script>
+<script src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/hire.js"></script>
+<script type="text/javascript"></script>;
+
+
+<iframe style="display: none;"></iframe>
+<script type="text/javascript" id="">var Tawk_API=Tawk_API||{},Tawk_LoadStart=new Date;(function(){var a=document.createElement("script"),b=document.getElementsByTagName("script")[0];a.async=!0;a.src="https://embed.tawk.to/5d092b4336eab97211180f4d/default";a.charset="UTF-8";a.setAttribute("crossorigin","*");b.parentNode.insertBefore(a,b)})();Tawk_API.onChatStarted=function(){dataLayer.push({event:"chat-sent",conversionValue:100})};</script>
+
+<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","1255821947931855");fbq("set","agent","tmgoogletagmanager","1255821947931855");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1255821947931855&amp;ev=PageView&amp;noscript=1"></noscript>
+<div id="Op1E0Pq-1565643972351" class="" style="display: block !important;"><iframe id="xok583G-1565643972354" src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/a_002.htm" scrolling="no" title="chat widget" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: auto !important; position: static !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 350px !important; height: 520px !important; z-index: 999999 !important; cursor: auto !important; float: none !important; border-radius: unset !important; display: none !important;" class="" frameborder="0"></iframe><iframe id="CpBqXf5-1565643972356" src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/a_002.htm" scrolling="no" title="chat widget" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: auto 20px 20px auto !important; position: fixed !important; border: 0px none !important; padding: 0px !important; transition-property: none !important; z-index: 1000001 !important; cursor: auto !important; float: none !important; box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 10px 0px !important; height: 60px !important; min-height: 60px !important; max-height: 60px !important; width: 60px !important; min-width: 60px !important; max-width: 60px !important; border-radius: 50% !important; transform: rotate(0deg) translateZ(0px) !important; transform-origin: 0px center 0px !important; margin: 0px !important; display: block !important;" class="" frameborder="0"></iframe><iframe id="zVGC3Ek-1565643972357" src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/a_002.htm" scrolling="no" title="chat widget" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: auto 15px 60px auto !important; position: fixed !important; border: 0px none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; z-index: 1000003 !important; cursor: auto !important; float: none !important; border-radius: unset !important; width: 21px !important; max-width: 21px !important; min-width: 21px !important; height: 21px !important; max-height: 21px !important; min-height: 21px !important; display: block !important;" class="" frameborder="0"></iframe><div style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: 0px auto auto 0px !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 100% !important; height: 100% !important; display: none !important; z-index: 1000001 !important; cursor: move !important; float: left !important; border-radius: unset !important;" class=""></div><div id="kMlc691-1565643972352" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: 0px auto auto 0px !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 6px !important; height: 100% !important; display: block !important; z-index: 999998 !important; cursor: w-resize !important; float: none !important; border-radius: unset !important;" class=""></div><div id="t5pT4y0-1565643972352" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: 0px 0px auto auto !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 100% !important; height: 6px !important; display: block !important; z-index: 999998 !important; cursor: n-resize !important; float: none !important; border-radius: unset !important;" class=""></div><div id="ezrridA-1565643972353" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: 0px auto auto 0px !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 12px !important; height: 12px !important; display: block !important; z-index: 999998 !important; cursor: nw-resize !important; float: none !important; border-radius: unset !important;" class=""></div><iframe id="OKZp8vd-1565643972442" src="How%20To%20Make%20Carousel%20In%20React%20Native%20With%20Custom%20Pagination%20%20%20BetaCloud_files/a_002.htm" scrolling="no" title="chat widget" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: auto 20px 100px auto !important; position: fixed !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 378px !important; z-index: 999999 !important; cursor: auto !important; float: none !important; border-radius: unset !important; display: block !important; height: 182px !important;" class="" frameborder="0"></iframe></div></body></html>

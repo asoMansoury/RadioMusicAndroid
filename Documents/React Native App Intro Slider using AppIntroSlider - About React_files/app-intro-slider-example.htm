@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"><meta name="description" content="Example of App Intro Slider in React Native"><title>App Intro Slider Example</title><meta property="og:url" content="https://snack.expo.io/@aboutreact/app-intro-slider-example"><meta property="og:title" content="App Intro Slider Example"><meta property="og:description" content="Example of App Intro Slider in React Native"><meta property="og:type" content="website"><meta property="og:image" content="https://s3.amazonaws.com/exp-brand-assets/SnackIcon_200.png"><meta property="og:image:width" content="200"><meta property="og:image:height" content="200"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@expo"><meta name="twitter:title" content="App Intro Slider Example"><meta name="twitter:description" content="Example of App Intro Slider in React Native"><meta name="twitter:image" content="https://s3.amazonaws.com/exp-brand-assets/SnackIcon_200.png"><meta name="google-site-verification" content="Fh25fNM-buRYptb-TO6MVgOjXGzdhmAnRgIC7sdrmbw"><link rel="shortcut icon" href="https://snack.expo.io/favicon.ico"><link rel="stylesheet" href="app-intro-slider-example_data/css.css"><link rel="stylesheet" href="app-intro-slider-example_data/normalize.css"><style type="text/css">
+                :root {
+                  --font-normal: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                  --font-monospace: 'Fira Code', 'Fira Mono', Monaco, Menlo, 'Ubuntu Mono', Consolas,
+                    source-code-pro, monospace;
+                }
+
+                html {
+                  box-sizing: border-box;
+                }
+
+                *,
+                *:before,
+                *:after {
+                  box-sizing: inherit;
+                }
+
+                *:focus {
+                  outline: none;
+                }
+
+                *:focus-visible {
+                  outline: auto;
+                }
+
+                html,
+                body {
+                  height: 100%;
+                  width: 100%;
+                  overflow: hidden;
+                }
+
+                body {
+                  font-family: var(--font-normal);
+                  font-size: 14px;
+                  line-height: 1.42857143;
+                  overscroll-behavior: none;
+                }
+
+                button,
+                input,
+                select,
+                textarea {
+                  font: inherit;
+                  color: inherit;
+                  line-height: inherit;
+                }
+
+                button {
+                  cursor: pointer;
+                }
+
+                button[disabled] {
+                  cursor: default;
+                }
+
+                #root {
+                  height: 100vh;
+                }
+
+                a {
+                  color: #4099ff;
+                }
+              </style><style type="text/css" data-aphrodite="true">._qykfwbc{-webkit-appearance:none !important;-moz-appearance:none !important;appearance:none !important;display:inline !important;background-color:transparent !important;border:0px !important;padding:0px !important;margin:0px !important;font-weight:bold !important;text-decoration:underline !important;}._sofkcg9{-webkit-appearance:none !important;-moz-appearance:none !important;appearance:none !important;display:inline !important;background-color:transparent !important;border:0px !important;padding:0 4px !important;margin-left:8px !important;}._y591fuk{height:100% !important;width:100% !important;--color-primary:#4630eb !important;--color-secondary:#5844ed !important;--color-error:#f44336 !important;--color-warning:#ff9800 !important;--color-success:#4caf50 !important;--color-border:rgba(0, 0, 0, .08) !important;--color-accent:#fff !important;--color-accent-text:#000 !important;--color-text:#D3D7CE !important;--color-background:#212733 !important;--color-content:#242B38 !important;--color-editor-background:#272D38 !important;--color-editor-text:#D9D7CE !important;--color-editor-border:#343D4A !important;}._bowrr3x{-webkit-box-direction:normal !important;-webkit-box-orient:vertical !important;display:-webkit-box !important;display:-moz-box !important;display:-ms-flexbox !important;display:-webkit-flex !important;display:flex !important;-webkit-flex-direction:column !important;-ms-flex-direction:column !important;flex-direction:column !important;height:100% !important;width:100% !important;overflow:hidden !important;background-color:#212733 !important;color:#D3D7CE !important;}@keyframes keyframe_9gmgni{0%{-webkit-transform:scale3d(0, 1, 1);-ms-transform:scale3d(0, 1, 1);transform:scale3d(0, 1, 1);opacity:1;}75%{-webkit-transform:scale3d(1, 1, 1);-ms-transform:scale3d(1, 1, 1);transform:scale3d(1, 1, 1);opacity:1;}100%{-webkit-transform:scale3d(1, 1, 1);-ms-transform:scale3d(1, 1, 1);transform:scale3d(1, 1, 1);opacity:0;}}._lgq6ku{position:absolute !important;left:0px !important;right:0px !important;height:2px !important;z-index:1 !important;background-color:#4630eb !important;-webkit-transform:scale3d(0, 1, 1) !important;-ms-transform:scale3d(0, 1, 1) !important;transform:scale3d(0, 1, 1) !important;-webkit-transform-origin:top left !important;-ms-transform-origin:top left !important;transform-origin:top left !important;-webkit-animation-name:keyframe_9gmgni !important;animation-name:keyframe_9gmgni !important;-webkit-animation-iteration-count:infinite !important;animation-iteration-count:infinite !important;}._1a8hyp7w{-webkit-box-pack:justify !important;-ms-flex-pack:justify !important;-webkit-box-align:center !important;-ms-flex-align:center !important;-webkit-box-direction:normal !important;-webkit-box-orient:horizontal !important;display:-webkit-box !important;display:-moz-box !important;display:-ms-flexbox !important;display:-webkit-flex !important;display:flex !important;-webkit-flex-direction:row !important;-ms-flex-direction:row !important;flex-direction:row !important;-webkit-align-items:center !important;align-items:center !important;-webkit-justify-content:space-between !important;justify-content:space-between !important;border-bottom:1px solid rgba(0, 0, 0, .08) !important;padding:4px !important;height:48px !important;background-color:#242B38 !important;color:#D3D7CE !important;}._1c40t29{-webkit-box-pack:center !important;-ms-flex-pack:center !important;-webkit-box-align:center !important;-ms-flex-align:center !important;display:-webkit-box !important;display:-moz-box !important;display:-ms-flexbox !important;display:-webkit-flex !important;display:flex !important;height:100% !important;width:100% !important;-webkit-align-items:center !important;align-items:center !important;-webkit-justify-content:center !important;justify-content:center !important;}._4w0mhx{-webkit-transform:scale(0.4) !important;-ms-transform:scale(0.4) !important;transform:scale(0.4) !important;opacity:0.2 !important;}._p6qm3x{position:relative !important;height:182px !important;width:182px !important;overflow:hidden !important;}@keyframes keyframe_1ysemx{0%{opacity:0;}39.9%{opacity:0;}40%{-webkit-transform:translate3d(78px, 68.5px, 0);-ms-transform:translate3d(78px, 68.5px, 0);transform:translate3d(78px, 68.5px, 0);opacity:1;}50%{-webkit-transform:translate3d(39px, 46.5px, 0);-ms-transform:translate3d(39px, 46.5px, 0);transform:translate3d(39px, 46.5px, 0);}}._1b0gwq5m{position:absolute !important;top:0px !important;left:0px !important;-webkit-animation-duration:4s !important;animation-duration:4s !important;-webkit-animation-delay:1s !important;animation-delay:1s !important;-webkit-animation-iteration-count:infinite !important;animation-iteration-count:infinite !important;-webkit-animation-direction:alternate-reverse !important;animation-direction:alternate-reverse !important;-webkit-transform:translate3d(39px, 46.5px, 0) !important;-ms-transform:translate3d(39px, 46.5px, 0) !important;transform:translate3d(39px, 46.5px, 0) !important;-webkit-animation-name:keyframe_1ysemx !important;animation-name:keyframe_1ysemx !important;}@keyframes keyframe_1a1qkd5{0%{opacity:0;}49.9%{opacity:0;}50%{-webkit-transform:translate3d(39px, 46.5px, 0);-ms-transform:translate3d(39px, 46.5px, 0);transform:translate3d(39px, 46.5px, 0);opacity:1;}60%{-webkit-transform:translate3d(39px, 0px, 0);-ms-transform:translate3d(39px, 0px, 0);transform:translate3d(39px, 0px, 0);}}._14l78d6g{position:absolute !important;top:0px !important;left:0px !important;-webkit-animation-duration:4s !important;animation-duration:4s !important;-webkit-animation-delay:1s !important;animation-delay:1s !important;-webkit-animation-iteration-count:infinite !important;animation-iteration-count:infinite !important;-webkit-animation-direction:alternate-reverse !important;animation-direction:alternate-reverse !important;-webkit-transform:translate3d(39px, 0px, 0) !important;-ms-transform:translate3d(39px, 0px, 0) !important;transform:translate3d(39px, 0px, 0) !important;-webkit-animation-name:keyframe_1a1qkd5 !important;animation-name:keyframe_1a1qkd5 !important;}@keyframes keyframe_10mcliz{}._1tvj80n9{position:absolute !important;top:0px !important;left:0px !important;-webkit-animation-duration:4s !important;animation-duration:4s !important;-webkit-animation-delay:1s !important;animation-delay:1s !important;-webkit-animation-iteration-count:infinite !important;animation-iteration-count:infinite !important;-webkit-animation-direction:alternate-reverse !important;animation-direction:alternate-reverse !important;-webkit-transform:translate3d(0, 68.5px, 0) !important;-ms-transform:translate3d(0, 68.5px, 0) !important;transform:translate3d(0, 68.5px, 0) !important;-webkit-animation-name:keyframe_10mcliz !important;animation-name:keyframe_10mcliz !important;}@keyframes keyframe_1omr31l{0%{opacity:0;}29.9%{opacity:0;}30%{-webkit-transform:translate3d(39px, 90px, 0);-ms-transform:translate3d(39px, 90px, 0);transform:translate3d(39px, 90px, 0);opacity:1;}40%{-webkit-transform:translate3d(78px, 68.5px, 0);-ms-transform:translate3d(78px, 68.5px, 0);transform:translate3d(78px, 68.5px, 0);}}._1cqt99fk{position:absolute !important;top:0px !important;left:0px !important;-webkit-animation-duration:4s !important;animation-duration:4s !important;-webkit-animation-delay:1s !important;animation-delay:1s !important;-webkit-animation-iteration-count:infinite !important;animation-iteration-count:infinite !important;-webkit-animation-direction:alternate-reverse !important;animation-direction:alternate-reverse !important;-webkit-transform:translate3d(78px, 68.5px, 0) !important;-ms-transform:translate3d(78px, 68.5px, 0) !important;transform:translate3d(78px, 68.5px, 0) !important;-webkit-animation-name:keyframe_1omr31l !important;animation-name:keyframe_1omr31l !important;}@keyframes keyframe_1pbmn7q{0%{-webkit-transform:translate3d(0, 68.5px, 0);-ms-transform:translate3d(0, 68.5px, 0);transform:translate3d(0, 68.5px, 0);}20%{-webkit-transform:translate3d(0, 68.5px, 0);-ms-transform:translate3d(0, 68.5px, 0);transform:translate3d(0, 68.5px, 0);}30%{-webkit-transform:translate3d(39px, 90px, 0);-ms-transform:translate3d(39px, 90px, 0);transform:translate3d(39px, 90px, 0);}}._1fho7xh9{position:absolute !important;top:0px !important;left:0px !important;-webkit-animation-duration:4s !important;animation-duration:4s !important;-webkit-animation-delay:1s !important;animation-delay:1s !important;-webkit-animation-iteration-count:infinite !important;animation-iteration-count:infinite !important;-webkit-animation-direction:alternate-reverse !important;animation-direction:alternate-reverse !important;-webkit-transform:translate3d(39px, 90px, 0) !important;-ms-transform:translate3d(39px, 90px, 0) !important;transform:translate3d(39px, 90px, 0) !important;-webkit-animation-name:keyframe_1pbmn7q !important;animation-name:keyframe_1pbmn7q !important;}@keyframes keyframe_b5qg5v{0%{opacity:0;}59.9%{opacity:0;}60%{-webkit-transform:translate3d(39px, 0px, 0);-ms-transform:translate3d(39px, 0px, 0);transform:translate3d(39px, 0px, 0);opacity:1;}70%{-webkit-transform:translate3d(0, 23px, 0);-ms-transform:translate3d(0, 23px, 0);transform:translate3d(0, 23px, 0);}}._l9xbyq9{position:absolute !important;top:0px !important;left:0px !important;-webkit-animation-duration:4s !important;animation-duration:4s !important;-webkit-animation-delay:1s !important;animation-delay:1s !important;-webkit-animation-iteration-count:infinite !important;animation-iteration-count:infinite !important;-webkit-animation-direction:alternate-reverse !important;animation-direction:alternate-reverse !important;-webkit-transform:translate3d(0, 23px, 0) !important;-ms-transform:translate3d(0, 23px, 0) !important;transform:translate3d(0, 23px, 0) !important;-webkit-animation-name:keyframe_b5qg5v !important;animation-name:keyframe_b5qg5v !important;}@keyframes keyframe_841g8u{0%{opacity:0;}69.9%{opacity:0;}70%{-webkit-transform:translate3d(0, 23px, 0);-ms-transform:translate3d(0, 23px, 0);transform:translate3d(0, 23px, 0);opacity:1;}80%{-webkit-transform:translate3d(39px, 42.5px, 0);-ms-transform:translate3d(39px, 42.5px, 0);transform:translate3d(39px, 42.5px, 0);}}._1oufavzh{position:absolute !important;top:0px !important;left:0px !important;-webkit-animation-duration:4s !important;animation-duration:4s !important;-webkit-animation-delay:1s !important;animation-delay:1s !important;-webkit-animation-iteration-count:infinite !important;animation-iteration-count:infinite !important;-webkit-animation-direction:alternate-reverse !important;animation-direction:alternate-reverse !important;-webkit-transform:translate3d(39px, 42.5px, 0) !important;-ms-transform:translate3d(39px, 42.5px, 0) !important;transform:translate3d(39px, 42.5px, 0) !important;-webkit-animation-name:keyframe_841g8u !important;animation-name:keyframe_841g8u !important;}@keyframes keyframe_1x1yick{0%{-webkit-transform:translate3d(133px, 12.5px, 0) scale(0);-ms-transform:translate3d(133px, 12.5px, 0) scale(0);transform:translate3d(133px, 12.5px, 0) scale(0);}80%{-webkit-transform:translate3d(133px, 12.5px, 0) scale(0);-ms-transform:translate3d(133px, 12.5px, 0) scale(0);transform:translate3d(133px, 12.5px, 0) scale(0);}90%{-webkit-transform:translate3d(133px, 12.5px, 0) scale(1);-ms-transform:translate3d(133px, 12.5px, 0) scale(1);transform:translate3d(133px, 12.5px, 0) scale(1);}}._ce1yvye{position:absolute !important;top:0px !important;left:0px !important;-webkit-animation-duration:4s !important;animation-duration:4s !important;-webkit-animation-delay:1s !important;animation-delay:1s !important;-webkit-animation-iteration-count:infinite !important;animation-iteration-count:infinite !important;-webkit-animation-direction:alternate-reverse !important;animation-direction:alternate-reverse !important;-webkit-transform:translate3d(133px, 12.5px, 0) !important;-ms-transform:translate3d(133px, 12.5px, 0) !important;transform:translate3d(133px, 12.5px, 0) !important;-webkit-animation-name:keyframe_1x1yick !important;animation-name:keyframe_1x1yick !important;}._49eqd4{-webkit-box-align:center !important;-ms-flex-align:center !important;-webkit-box-direction:normal !important;-webkit-box-orient:horizontal !important;display:-webkit-box !important;display:-moz-box !important;display:-ms-flexbox !important;display:-webkit-flex !important;display:flex !important;-webkit-flex-direction:row !important;-ms-flex-direction:row !important;flex-direction:row !important;-webkit-align-items:center !important;align-items:center !important;color:#999 !important;border-top:1px solid rgba(0, 0, 0, .08) !important;-webkit-transition:background .2s !important;-moz-transition:background .2s !important;transition:background .2s !important;padding:0 4px !important;font-size:12px !important;height:26px !important;}</style><script type="text/javascript" async="" src="app-intro-slider-example_data/amplitude-5.js"></script><script async="" src="analytics.js"></script><script type="text/javascript" async="" src="app-intro-slider-example_data/analytics.js"></script><script>
+               window.__INITIAL_DATA__ = {"data":{"type":"success","snack":{"code":{"App.js":{"contents":"/*This is an example of React Native App Intro Slider */\nimport React from 'react';\n//import react in project \n\nimport { StyleSheet, View, Text } from 'react-native';\n//import all the required component\n\nimport AppIntroSlider from 'react-native-app-intro-slider';\n//import AppIntroSlider to use it\n\nexport default class App extends React.Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      showRealApp: false,\n      //To show the main page of the app\n    };\n  }\n  _onDone = () => {\n    // After user finished the intro slides. Show real app through\n    // navigation or simply by controlling state\n    this.setState({ showRealApp: true });\n  };\n  _onSkip = () => {\n    // After user skip the intro slides. Show real app through\n    // navigation or simply by controlling state\n    this.setState({ showRealApp: true });\n  };\n  render() {\n    //If false show the Intro Slides\n    if (this.state.showRealApp) {\n      //Real Application\n      return (\n        <View\n          style={{\n            flex: 1,\n            justifyContent: 'center',\n            alignItems: 'center',\n            padding: 50,\n          }}>\n          <Text>\n            This will be your screen when you click Skip from any slide or Done\n            button at last\n          </Text>\n        </View>\n      );\n    } else {\n      //Intro slides\n      return (\n        <AppIntroSlider\n          slides={slides}\n          //comming from the JsonArray below\n          onDone={this._onDone}\n          //Handler for the done On last slide\n          showSkipButton={true}\n          onSkip={this._onSkip}\n        />\n      );\n    }\n  }\n}\nconst styles = StyleSheet.create({\n  image: {\n    width: 200,\n    height: 200,\n  },\n  text: {\n    color: '#FFFFFF',\n    fontSize: 20,\n  },\n  title: {\n    fontSize: 28,\n    fontWeight: 'bold',\n    color: 'white',\n    backgroundColor: 'transparent',\n    textAlign: 'center',\n    marginTop: 16,\n  },\n});\n\nconst slides = [\n  {\n    key: 's1',\n    text: 'Best Recharge offers',\n    title: 'Mobile Recharge',\n    titleStyle: styles.title,\n    textStyle: styles.text,\n    image: {\n      uri:\n        'http://aboutreact.com/wp-content/uploads/2018/08/mobile_recharge.png',\n    },\n    imageStyle: styles.image,\n    backgroundColor: '#20d2bb',\n  },\n  {\n    key: 's2',\n    title: 'Flight Booking',\n    titleStyle: styles.title,\n    text: 'Upto 25% off on Domestic Flights',\n    image: {\n      uri:\n        'http://aboutreact.com/wp-content/uploads/2018/08/flight_ticket_booking.png',\n    },\n    imageStyle: styles.image,\n    backgroundColor: '#febe29',\n  },\n  {\n    key: 's3',\n    title: 'Great Offers',\n    titleStyle: styles.title,\n    text: 'Enjoy Great offers on our all services',\n    image: {\n      uri: 'http://aboutreact.com/wp-content/uploads/2018/08/discount1.png',\n    },\n    imageStyle: styles.image,\n    backgroundColor: '#22bcb5',\n  },\n  {\n    key: 's4',\n    title: 'Best Deals',\n    titleStyle: styles.title,\n    text: ' Best Deals on all our services',\n    image: {\n      uri: 'http://aboutreact.com/wp-content/uploads/2018/08/best_deals1.png',\n    },\n    imageStyle: styles.image,\n    backgroundColor: '#3395ff',\n  },\n  {\n    key: 's5',\n    title: 'Bus Booking',\n    titleStyle: styles.title,\n    text: 'Enjoy Travelling on Bus with flat 100% off',\n    image: {\n      uri:\n        'http://aboutreact.com/wp-content/uploads/2018/08/bus_ticket_booking.png',\n    },\n    imageStyle: styles.image,\n    backgroundColor: '#f6437b',\n  },\n  {\n    key: 's6',\n    title: 'Train Booking',\n    titleStyle: styles.title,\n    text: ' 10% off on first Train booking',\n    image: {\n      uri:\n        'http://aboutreact.com/wp-content/uploads/2018/08/train_ticket_booking.png',\n    },\n    imageStyle: styles.image,\n    backgroundColor: '#febe29',\n  },\n];","type":"CODE"}},"created":"2019-02-01T19:23:12.474Z","dependencies":{"react-native-app-intro-slider":{"peerDependencies":{},"resolved":"1.0.1","version":"1.0.1"}},"id":"ryuihGMNE","manifest":{"dependencies":{"react-native-app-intro-slider":"1.0.1"},"description":"Example of App Intro Slider in React Native","name":"App Intro Slider Example","sdkVersion":"32.0.0"},"previewLocation":"https://snack-code-uploads.s3.us-west-1.amazonaws.com/~preview/16fc0a9343972f6494bb9774ec9c7e47","sdkVersion":"32.0.0","status":"SUCCESS","username":"snack","history":[{"id":"H1ZInGfV4","savedAt":"2019-02-01T19:21:45.431Z"},{"id":"H102o7j8m","savedAt":"2018-08-22T18:30:13.935Z"}],"isDraft":false}},"splitTestSettings":{"defaultConnectionMethod":"device-id","authFlow":"save2","snackFirstSeen":"2019-08-14"}} </script><script charset="utf-8" src="app-intro-slider-example_data/2.js"></script><script charset="utf-8" src="app-intro-slider-example_data/1.js"></script><script charset="utf-8" src="app-intro-slider-example_data/0.js"></script><script charset="utf-8" src="app-intro-slider-example_data/9.js"></script><link charset="utf-8" rel="preload" as="script" href="app-intro-slider-example_data/5.js"><script charset="utf-8" src="app-intro-slider-example_data/5.js"></script><script charset="utf-8" src="app-intro-slider-example_data/3.js"></script><script charset="utf-8" src="app-intro-slider-example_data/27.js"></script><script charset="utf-8" src="app-intro-slider-example_data/17.js"></script><meta property="og:url" content="https://snack.expo.io/@aboutreact/app-intro-slider-example" data-rh="true"><meta property="og:title" content="App Intro Slider Example" data-rh="true"><meta property="og:description" content="Example of App Intro Slider in React Native" data-rh="true"><meta property="og:type" content="website" data-rh="true"><meta property="og:image" content="https://s3.amazonaws.com/exp-brand-assets/ExpoIcon_200.png" data-rh="true"><meta property="og:image:width" content="200" data-rh="true"><meta property="og:image:height" content="200" data-rh="true"></head><body><div id="root"><div class="_y591fuk"><main class="_c8v6kdy"><div class="_1a8hyp7w"><div class="_486qrv"><h1 class="_xbazx0">App Intro Slider Example</h1><div class="_14qlmkj"><div class="_1p7kgfo"><button class="_1gg8ropu"></button><div class="_etdaopz"><span class="_bp5s6ym"></span><p class="_1l06a80">description</p></div></div><a href="https://snack.expo.io/@aboutreact/app-intro-slider-example?session_id=snack-session-yTwOgbruZ" target="_blank" rel="noopener noreferrer" class="_1ctczj5u"></a></div></div><a href="https://expo.io/" target="_blank" rel="noopener noreferrer" class="_1qsn5c"><img class="_dp38z" src="app-intro-slider-example_data/e392635154a17bd759d3bbb77e72eada.png"></a></div><div class="_1vjpwpl"><div class="_szqwpm"><div class="_1l3ym98 prism-code" style="position: relative; text-align: left; white-space: pre-wrap; word-break: keep-all; box-sizing: border-box; padding: 0px; overflow: hidden;"><textarea style="margin: 0px; border: 0px none; background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; box-sizing: inherit; display: inherit; font-family: inherit; font-size: inherit; font-style: inherit; font-variant-ligatures: inherit; font-weight: inherit; letter-spacing: inherit; line-height: inherit; text-indent: inherit; text-rendering: inherit; text-transform: inherit; white-space: inherit; word-break: inherit; position: absolute; top: 0px; left: 0px; height: 100%; width: 100%; resize: none; color: inherit; overflow: hidden; -webkit-text-fill-color: transparent; padding: 8px;" class="npm__react-simple-code-editor__textarea" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" data-gramm="false">/*This is an example of React Native App Intro Slider */
+import React from 'react';
+//import react in project 
+
+import { StyleSheet, View, Text } from 'react-native';
+//import all the required component
+
+import AppIntroSlider from 'react-native-app-intro-slider';
+//import AppIntroSlider to use it
+
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showRealApp: false,
+      //To show the main page of the app
+    };
+  }
+  _onDone = () =&gt; {
+    // After user finished the intro slides. Show real app through
+    // navigation or simply by controlling state
+    this.setState({ showRealApp: true });
+  };
+  _onSkip = () =&gt; {
+    // After user skip the intro slides. Show real app through
+    // navigation or simply by controlling state
+    this.setState({ showRealApp: true });
+  };
+  render() {
+    //If false show the Intro Slides
+    if (this.state.showRealApp) {
+      //Real Application
+      return (
+        &lt;View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: 50,
+          }}&gt;
+          &lt;Text&gt;
+            This will be your screen when you click Skip from any slide or Done
+            button at last
+          &lt;/Text&gt;
+        &lt;/View&gt;
+      );
+    } else {
+      //Intro slides
+      return (
+        &lt;AppIntroSlider
+          slides={slides}
+          //comming from the JsonArray below
+          onDone={this._onDone}
+          //Handler for the done On last slide
+          showSkipButton={true}
+          onSkip={this._onSkip}
+        /&gt;
+      );
+    }
+  }
+}
+const styles = StyleSheet.create({
+  image: {
+    width: 200,
+    height: 200,
+  },
+  text: {
+    color: '#FFFFFF',
+    fontSize: 20,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: 'white',
+    backgroundColor: 'transparent',
+    textAlign: 'center',
+    marginTop: 16,
+  },
+});
+
+const slides = [
+  {
+    key: 's1',
+    text: 'Best Recharge offers',
+    title: 'Mobile Recharge',
+    titleStyle: styles.title,
+    textStyle: styles.text,
+    image: {
+      uri:
+        'http://aboutreact.com/wp-content/uploads/2018/08/mobile_recharge.png',
+    },
+    imageStyle: styles.image,
+    backgroundColor: '#20d2bb',
+  },
+  {
+    key: 's2',
+    title: 'Flight Booking',
+    titleStyle: styles.title,
+    text: 'Upto 25% off on Domestic Flights',
+    image: {
+      uri:
+        'http://aboutreact.com/wp-content/uploads/2018/08/flight_ticket_booking.png',
+    },
+    imageStyle: styles.image,
+    backgroundColor: '#febe29',
+  },
+  {
+    key: 's3',
+    title: 'Great Offers',
+    titleStyle: styles.title,
+    text: 'Enjoy Great offers on our all services',
+    image: {
+      uri: 'http://aboutreact.com/wp-content/uploads/2018/08/discount1.png',
+    },
+    imageStyle: styles.image,
+    backgroundColor: '#22bcb5',
+  },
+  {
+    key: 's4',
+    title: 'Best Deals',
+    titleStyle: styles.title,
+    text: ' Best Deals on all our services',
+    image: {
+      uri: 'http://aboutreact.com/wp-content/uploads/2018/08/best_deals1.png',
+    },
+    imageStyle: styles.image,
+    backgroundColor: '#3395ff',
+  },
+  {
+    key: 's5',
+    title: 'Bus Booking',
+    titleStyle: styles.title,
+    text: 'Enjoy Travelling on Bus with flat 100% off',
+    image: {
+      uri:
+        'http://aboutreact.com/wp-content/uploads/2018/08/bus_ticket_booking.png',
+    },
+    imageStyle: styles.image,
+    backgroundColor: '#f6437b',
+  },
+  {
+    key: 's6',
+    title: 'Train Booking',
+    titleStyle: styles.title,
+    text: ' 10% off on first Train booking',
+    image: {
+      uri:
+        'http://aboutreact.com/wp-content/uploads/2018/08/train_ticket_booking.png',
+    },
+    imageStyle: styles.image,
+    backgroundColor: '#febe29',
+  },
+];</textarea><pre aria-hidden="true" style="margin: 0px; border: 0px none; background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; box-sizing: inherit; display: inherit; font-family: inherit; font-size: inherit; font-style: inherit; font-variant-ligatures: inherit; font-weight: inherit; letter-spacing: inherit; line-height: inherit; text-indent: inherit; text-rendering: inherit; text-transform: inherit; white-space: inherit; word-break: inherit; position: relative; pointer-events: none; padding: 8px;"><span class="token comment">/*This is an example of React Native App Intro Slider */</span>
+<span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token comment">//import react in project </span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> StyleSheet<span class="token punctuation">,</span> View<span class="token punctuation">,</span> Text <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native'</span><span class="token punctuation">;</span>
+<span class="token comment">//import all the required component</span>
+
+<span class="token keyword">import</span> AppIntroSlider <span class="token keyword">from</span> <span class="token string">'react-native-app-intro-slider'</span><span class="token punctuation">;</span>
+<span class="token comment">//import AppIntroSlider to use it</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token punctuation">{</span>
+      showRealApp<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token comment">//To show the main page of the app</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token function-variable function">_onDone</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token comment">// After user finished the intro slides. Show real app through</span>
+    <span class="token comment">// navigation or simply by controlling state</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> showRealApp<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token function-variable function">_onSkip</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token comment">// After user skip the intro slides. Show real app through</span>
+    <span class="token comment">// navigation or simply by controlling state</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> showRealApp<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//If false show the Intro Slides</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>showRealApp<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">//Real Application</span>
+      <span class="token keyword">return</span> <span class="token punctuation">(</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>View</span>
+          <span class="token attr-name">style</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>
+            flex<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+            justifyContent<span class="token punctuation">:</span> <span class="token string">'center'</span><span class="token punctuation">,</span>
+            alignItems<span class="token punctuation">:</span> <span class="token string">'center'</span><span class="token punctuation">,</span>
+            padding<span class="token punctuation">:</span> <span class="token number">50</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Text</span><span class="token punctuation">&gt;</span></span>
+            This will be your screen when you click Skip <span class="token keyword">from</span> any slide or Done
+            button at last
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Text</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>View</span><span class="token punctuation">&gt;</span></span>
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token comment">//Intro slides</span>
+      <span class="token keyword">return</span> <span class="token punctuation">(</span>
+        <span class="token operator">&lt;</span>AppIntroSlider
+          slides<span class="token operator">=</span><span class="token punctuation">{</span>slides<span class="token punctuation">}</span>
+          <span class="token comment">//comming from the JsonArray below</span>
+          onDone<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>_onDone<span class="token punctuation">}</span>
+          <span class="token comment">//Handler for the done On last slide</span>
+          showSkipButton<span class="token operator">=</span><span class="token punctuation">{</span><span class="token boolean">true</span><span class="token punctuation">}</span>
+          onSkip<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>_onSkip<span class="token punctuation">}</span>
+        <span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> styles <span class="token operator">=</span> StyleSheet<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  image<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    width<span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+    height<span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  text<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    color<span class="token punctuation">:</span> <span class="token string">'#FFFFFF'</span><span class="token punctuation">,</span>
+    fontSize<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  title<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    fontSize<span class="token punctuation">:</span> <span class="token number">28</span><span class="token punctuation">,</span>
+    fontWeight<span class="token punctuation">:</span> <span class="token string">'bold'</span><span class="token punctuation">,</span>
+    color<span class="token punctuation">:</span> <span class="token string">'white'</span><span class="token punctuation">,</span>
+    backgroundColor<span class="token punctuation">:</span> <span class="token string">'transparent'</span><span class="token punctuation">,</span>
+    textAlign<span class="token punctuation">:</span> <span class="token string">'center'</span><span class="token punctuation">,</span>
+    marginTop<span class="token punctuation">:</span> <span class="token number">16</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> slides <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    key<span class="token punctuation">:</span> <span class="token string">'s1'</span><span class="token punctuation">,</span>
+    text<span class="token punctuation">:</span> <span class="token string">'Best Recharge offers'</span><span class="token punctuation">,</span>
+    title<span class="token punctuation">:</span> <span class="token string">'Mobile Recharge'</span><span class="token punctuation">,</span>
+    titleStyle<span class="token punctuation">:</span> styles<span class="token punctuation">.</span>title<span class="token punctuation">,</span>
+    textStyle<span class="token punctuation">:</span> styles<span class="token punctuation">.</span>text<span class="token punctuation">,</span>
+    image<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      uri<span class="token punctuation">:</span>
+        <span class="token string">'http://aboutreact.com/wp-content/uploads/2018/08/mobile_recharge.png'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    imageStyle<span class="token punctuation">:</span> styles<span class="token punctuation">.</span>image<span class="token punctuation">,</span>
+    backgroundColor<span class="token punctuation">:</span> <span class="token string">'#20d2bb'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    key<span class="token punctuation">:</span> <span class="token string">'s2'</span><span class="token punctuation">,</span>
+    title<span class="token punctuation">:</span> <span class="token string">'Flight Booking'</span><span class="token punctuation">,</span>
+    titleStyle<span class="token punctuation">:</span> styles<span class="token punctuation">.</span>title<span class="token punctuation">,</span>
+    text<span class="token punctuation">:</span> <span class="token string">'Upto 25% off on Domestic Flights'</span><span class="token punctuation">,</span>
+    image<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      uri<span class="token punctuation">:</span>
+        <span class="token string">'http://aboutreact.com/wp-content/uploads/2018/08/flight_ticket_booking.png'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    imageStyle<span class="token punctuation">:</span> styles<span class="token punctuation">.</span>image<span class="token punctuation">,</span>
+    backgroundColor<span class="token punctuation">:</span> <span class="token string">'#febe29'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    key<span class="token punctuation">:</span> <span class="token string">'s3'</span><span class="token punctuation">,</span>
+    title<span class="token punctuation">:</span> <span class="token string">'Great Offers'</span><span class="token punctuation">,</span>
+    titleStyle<span class="token punctuation">:</span> styles<span class="token punctuation">.</span>title<span class="token punctuation">,</span>
+    text<span class="token punctuation">:</span> <span class="token string">'Enjoy Great offers on our all services'</span><span class="token punctuation">,</span>
+    image<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      uri<span class="token punctuation">:</span> <span class="token string">'http://aboutreact.com/wp-content/uploads/2018/08/discount1.png'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    imageStyle<span class="token punctuation">:</span> styles<span class="token punctuation">.</span>image<span class="token punctuation">,</span>
+    backgroundColor<span class="token punctuation">:</span> <span class="token string">'#22bcb5'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    key<span class="token punctuation">:</span> <span class="token string">'s4'</span><span class="token punctuation">,</span>
+    title<span class="token punctuation">:</span> <span class="token string">'Best Deals'</span><span class="token punctuation">,</span>
+    titleStyle<span class="token punctuation">:</span> styles<span class="token punctuation">.</span>title<span class="token punctuation">,</span>
+    text<span class="token punctuation">:</span> <span class="token string">' Best Deals on all our services'</span><span class="token punctuation">,</span>
+    image<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      uri<span class="token punctuation">:</span> <span class="token string">'http://aboutreact.com/wp-content/uploads/2018/08/best_deals1.png'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    imageStyle<span class="token punctuation">:</span> styles<span class="token punctuation">.</span>image<span class="token punctuation">,</span>
+    backgroundColor<span class="token punctuation">:</span> <span class="token string">'#3395ff'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    key<span class="token punctuation">:</span> <span class="token string">'s5'</span><span class="token punctuation">,</span>
+    title<span class="token punctuation">:</span> <span class="token string">'Bus Booking'</span><span class="token punctuation">,</span>
+    titleStyle<span class="token punctuation">:</span> styles<span class="token punctuation">.</span>title<span class="token punctuation">,</span>
+    text<span class="token punctuation">:</span> <span class="token string">'Enjoy Travelling on Bus with flat 100% off'</span><span class="token punctuation">,</span>
+    image<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      uri<span class="token punctuation">:</span>
+        <span class="token string">'http://aboutreact.com/wp-content/uploads/2018/08/bus_ticket_booking.png'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    imageStyle<span class="token punctuation">:</span> styles<span class="token punctuation">.</span>image<span class="token punctuation">,</span>
+    backgroundColor<span class="token punctuation">:</span> <span class="token string">'#f6437b'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    key<span class="token punctuation">:</span> <span class="token string">'s6'</span><span class="token punctuation">,</span>
+    title<span class="token punctuation">:</span> <span class="token string">'Train Booking'</span><span class="token punctuation">,</span>
+    titleStyle<span class="token punctuation">:</span> styles<span class="token punctuation">.</span>title<span class="token punctuation">,</span>
+    text<span class="token punctuation">:</span> <span class="token string">' 10% off on first Train booking'</span><span class="token punctuation">,</span>
+    image<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      uri<span class="token punctuation">:</span>
+        <span class="token string">'http://aboutreact.com/wp-content/uploads/2018/08/train_ticket_booking.png'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    imageStyle<span class="token punctuation">:</span> styles<span class="token punctuation">.</span>image<span class="token punctuation">,</span>
+    backgroundColor<span class="token punctuation">:</span> <span class="token string">'#febe29'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span><br></pre><style type="text/css">
+/**
+ * Reset the text fill color so that placeholder is visible
+ */
+.npm__react-simple-code-editor__textarea:empty {
+  -webkit-text-fill-color: inherit !important;
+}
+
+/**
+ * Hack to apply on some CSS on IE10 and IE11
+ */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /**
+    * IE doesn't support '-webkit-text-fill-color'
+    * So we use 'color: transparent' to make the text transparent on IE
+    * Unlike other browsers, it doesn't affect caret color in IE
+    */
+  .npm__react-simple-code-editor__textarea {
+    color: transparent !important;
+  }
+
+  .npm__react-simple-code-editor__textarea::selection {
+    background-color: #accef7 !important;
+    color: transparent !important;
+  }
+}
+</style></div><style type="text/css">
+  .prism-code {
+    background-color: #212733;
+    color: #d9d7ce;
+  }
+
+  .prism-code ::selection {
+    background: rgba(0, 0, 0, 0.16);
+  }
+
+  .prism-code ::-moz-selection {
+    background: rgba(0, 0, 0, 0.16);
+  }
+
+  .prism-code textarea {
+    outline: 0;
+  }
+
+  .prism-code .token.tag,
+  .prism-code .token.property {
+    color: #5ccfe6;
+  }
+
+  .prism-code .token.function {
+    color: #ff9d45;
+  }
+
+  .prism-code .token.entity {
+    color: #5ccfe6;
+  }
+
+  .prism-code .token.string,
+  .prism-code .token.selector,
+  .prism-code .token.char,
+  .prism-code .token.builtin,
+  .prism-code .token.inserted {
+    color: #bae67e;
+  }
+
+  .prism-code .token.regexp,
+  .prism-code .token.variable {
+    color: #95e6cb;
+  }
+
+  .prism-code .token.keyword,
+  .prism-code .token.atrule,
+  .prism-code .token.tag > .token.punctuation,
+  .prism-code .token.important {
+    color: #ffae57;
+  }
+
+  .prism-code .token.attr-name {
+    color: #ff9d45;
+  }
+
+  .prism-code .token.attr-value {
+    color: #bae67e;
+  }
+
+  .prism-code .token.markup,
+  .prism-code .token.special {
+    color: #ff00ff;
+  }
+
+  .prism-code .token.comment,
+  .prism-code .token.prolog,
+  .prism-code .token.doctype,
+  .prism-code .token.cdata {
+    color: #5c6773;
+  }
+
+  .prism-code .token.number {
+    color: #ff9d45;
+  }
+
+  .prism-code .token.constant,
+  .prism-code .token.boolean,
+  .prism-code .token.constant,
+  .prism-code .token.symbol,
+  .prism-code .token.deleted {
+    color: #ff9d45;
+  }
+
+  .prism-code .token.operator,
+  .prism-code .token.entity,
+  .prism-code .token.url,
+  .prism-code .language-css .token.string,
+  .prism-code .style .token.string {
+    color: #778899;
+  }
+
+  .prism-code .token.punctuation {
+    color: #5c6773;
+  }
+</style></div><div class="_of4f7h _1dwy44t"><div class="_1wrvrbc"><iframe src="https://appetize.io/embed/tq08t4qj50qjtmgg716hn6jut4?autoplay=false&amp;debug=true&amp;device=iphone5&amp;deviceColor=white&amp;embed=true&amp;orientation=portrait&amp;scale=76&amp;screenOnly=true&amp;xDocMsg=true&amp;xdocMsg=true&amp;params=%7B%22EXKernelLaunchUrlDefaultsKey%22%3A%22exp%3A%2F%2Fexpo.io%2F%40aboutreact%2Fapp-intro-slider-example%2Bi4vS2xOpu%22%2C%22EXKernelDisableNuxDefaultsKey%22%3Atrue%7D" class="_1il6y7w"></iframe><div class="_fcwwwi"><a class="_1y34wvw" style="top: 160px;"><div class="_d0bve1"><span class="_260kyx">Tap to play</span></div></a><a class="_1y34wvw" style="top: 250px;"><div class="_d0bve1"><span class="_260kyx">Run on your device</span></div></a></div></div></div></div><div class="_1uxvl"><div class="_49eqd4"><div></div><div class="_1ik16kg"><label class="_1jlqsc5"><span class="_12lll1p">Preview</span><span class="_11jx7z26"></span><input type="checkbox" class="_1u9fru1" checked="checked"></label><span class="_154j88y"><button class="_11fl46e6">iOS</button><button class="_1tkoa7q">Android</button></span></div></div></div><div></div></main></div></div><script>!function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)return;else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";    analytics.load('Ha0swpI6s2CVEMxK84cEmKmUVmBa1USu');    analytics.page();    analytics.identify({      user_properties: {"defaultConnectionMethod":"device-id","authFlow":"save2","snackFirstSeen":"2019-08-14"}    });}}();</script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-53647600-5', {cookieDomain: 'auto', siteSpeedSampleRate: 100});ga('send', 'pageview');</script><script src="app-intro-slider-example_data/polyfill.js"></script><script src="app-intro-slider-example_data/app.js"></script><div><div class="_1mnes4hg"><div class="_1ba9hs1"></div></div></div><div><div class="_1mnes4hg"><div class="_1ba9hs1"></div></div></div></body></html>

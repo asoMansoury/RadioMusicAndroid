@@ -1,0 +1,241 @@
+.arrow {
+    position: absolute;
+    bottom: 20vh;
+    width: 100vw;
+    left: 0;
+    z-index: 11;
+    text-align: center;
+    padding-left: 0px;
+}
+.banner-div {
+    top: 50%;
+    left: 0px;
+    position: absolute;
+    color: #fff;
+    z-index: 11;
+    text-align: center;
+    width: 100%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.page-text {
+    text-align: center;
+    margin-top: 25px;
+}
+.page-text h2 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 20px;
+    text-transform: capitalize;
+}
+
+a.page-div:hover {
+    -webkit-box-shadow: 0 0 40px rgba(0,0,0,.3);
+    box-shadow: 0 0 40px rgba(0,0,0,.3);
+}
+.demo-image-section {
+    position: relative;
+    box-shadow: 0 0 15px 0 rgba(0,0,0,.2);
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+.demo-image-section:hover .img-hover {
+    visibility: visible;
+    opacity: 1;
+}
+.demo-image-section .img-hover {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(19, 23, 46, 0.44);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .3s ease-in;
+    visibility: hidden;
+    opacity: 0;
+}
+.img-hover-inner {
+    text-align: center;
+}
+
+.img-hover-inner a {
+    background: red;
+    color: #fff;
+    background: #1fcae8;
+    padding: 8px 15px;
+    display: inline-block;
+    color: #fff;
+    margin-top: 15px;
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 5px 8px;
+    font-size: 14px;
+    border-radius: 4px;
+    margin-bottom: 50px;
+    display: inline-table;
+    line-height: 28px;
+    font-weight: 600;
+    background: #fe846f;
+    color: #ffffff;
+    text-decoration: none;
+    transition: all .5s ease;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    text-transform: uppercase;
+
+}
+
+.img-hover-inner h2 {
+    color: #fff;
+}
+/*Page Section*/
+.section-title-text {
+    text-align: center;
+    padding: 50px 0px 0 0;
+}
+
+.section-title-text h2,.section-title-text h1 {
+    font-size: 40px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 15px;
+}
+.section-title-text p {
+    color: #fff;
+}
+.thumb img {
+    margin-bottom: -8px;
+}
+.section-title-text .breadcrumb {
+    background: transparent;
+
+}
+.section-title-text nav{
+      display: inline-block;
+      text-align: center;
+}
+.breadcrumb-item + .breadcrumb-item::before {
+    display: inline-block;
+    padding-right: 0.5rem;
+    color: #ffffff;
+    content: "/";
+}
+.breadcrumb li {
+    font-size: 15px;
+    color: #fff !important;
+    font-weight: 600;
+}
+
+.header-app.title-header-page img {
+    width: 250px;
+    margin-bottom: 25px;
+}
+.demo-title {
+    background: #5661dd;
+    text-align: center;
+    font-size: 16px;
+    text-transform: capitalize;
+    padding: 10px;
+    font-weight: 600;
+    color: #ffffff;
+    z-index: 99;
+    position: relative;
+}
+
+.demo-image-section:hover .demo-title{
+  color: #fff;
+}
+.header-app.title-header-page h3 {
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 45px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    line-height: 45px;
+    margin-bottom: 30px;
+}
+.index-btn.header-btn-color {
+    margin-top: 50px;
+}
+.index-headline {
+    color: #fff;
+    font-size: 45px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    /* display: flex; */
+    width: 100%;
+}
+.header-app.title-header-page p {
+    color: #fff;
+    text-transform: capitalize;
+    font-size: 18px;
+    line-height: 28px;
+}
+.title-main-page p {
+    position: relative;
+}
+
+.title-main-page p:after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 4px;
+    background: #fe846f;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.cd-headline.slide .cd-words-wrapper {
+    width: 500px !important;
+    overflow: hidden;
+    vertical-align: top;
+}
+.cd-headline.slide b {
+  text-align: center;
+  width: 500px !important
+
+}
+a.btn.btn-white {
+    border: 2px solid #e5b705;
+    color: #e5b705;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 43px;
+    transition: .3s;
+outline: none;
+}
+
+a.btn.btn-white:hover {
+    background: #f4c201;
+    color: #fff;
+}
+.demo-title h2 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+}
+ @media screen and (max-width: 767px) {
+        .index-headline {
+    font-size: 30px !important;
+}
+.header-app.title-header-page h3 {
+        font-size: 30px !important;
+}
+.header-app.title-header-page p {
+    font-size: 14px;
+}
+}
+
+
+      @media screen and (max-width: 460px){
+.cd-headline.slide b {
+    text-align: center;
+    width: 370px !important;
+}
+      }

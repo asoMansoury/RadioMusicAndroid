@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#" lang="en-US"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/osd.js"></script><script type="text/javascript">
+
+		                            var real_socket = window.WebSocket;
+
+	var WebSocket = window.WebSocket = function(uri)
+	{
+		this.websocket = new real_socket(uri);
+		this.websocket.onopen = this.onOpen.bind(this);
+		this.websocket.onmessage = this.onMessage.bind(this);
+		this.listeners = {onmessage: null, onopen: null};
+
+
+
+
+
+
+		if (!window._openWebSockets) window._openWebSockets = [];
+		window._openWebSockets.push(this);
+	};
+
+	WebSocket.prototype.send = function(data) {
+
+
+		// First create the event
+		let ws_sniff_debug_to = new CustomEvent("ws_sniff_debug_to",
+		                                        {
+			                                        detail:
+				                                        {
+					                                        data: data,
+					                                        obj: this.websocket
+				                                        }
+		                                        }
+		);
+
+		document.body.dispatchEvent(ws_sniff_debug_to);
+
+		this.websocket.send.apply(this.websocket, arguments);
+	}
+
+	WebSocket.prototype.onOpen = function(e)
+	{
+
+
+		// First create the event
+		let ws_sniff_debug_open = new CustomEvent("ws_sniff_debug_open",
+		                                          {
+			                                          detail:
+				                                          {
+					                                          data: arguments,
+					                                          obj: this.websocket
+				                                          }
+		                                          }
+		);
+
+		this.listeners.onopen(e);
+	}
+
+	WebSocket.prototype.onMessage = function(e){
+
+
+
+		// First create the event
+		let ws_sniff_debug_from = new CustomEvent("ws_sniff_debug_from",
+		                                          {
+			                                          detail:
+				                                          {
+					                                          data: e.data,
+					                                          obj: this.websocket
+				                                          }
+		                                          }
+		);
+
+		document.body.dispatchEvent(ws_sniff_debug_from);
+
+		this.listeners.onmessage(e);
+	}
+
+	Object.defineProperty(WebSocket.prototype, 'readyState', {
+		get: function() {
+			return this.websocket.readyState;
+		}
+	});
+
+	Object.defineProperty(WebSocket.prototype, 'onopen', {
+		get: function() {
+			return this.listeners.onopen;
+		},
+		set: function(fn) {
+			this.listeners.onopen = fn;
+		}
+	});
+
+
+	Object.defineProperty(WebSocket.prototype, 'onclose', {
+		get: function() {
+			return this.websocket.onclose;
+		},
+		set: function(fn) {
+			this.websocket.onclose = fn;
+		}
+	});
+
+
+	Object.defineProperty(WebSocket.prototype, 'onmessage', {
+		get: function() {
+			return this.listeners.onmessage;
+		},
+		set: function(fn) {
+			this.listeners.onmessage = fn;
+		}
+	});
+
+	Object.defineProperty(WebSocket.prototype, 'onerror', {
+		get: function() {
+
+			return this.websocket.onerror;
+		},
+		set: function(fn) {
+
+			this.websocket.onerror = fn;
+		}
+	});
+
+	
+	      setTimeout(function()
+                         {
+
+
+	                         if (typeof(io) == 'function')
+                           {
+          
+
+
+	                           io.Socket.prototype.packet = function (packet) {
+	                       
+	                      
+	                      
+									  // First create the event
+										let ws_sniff_debug_to = new CustomEvent("ws_sniff_debug_to",
+										                                        {
+											                                        detail:
+												                                        {
+													                                        data: packet.data,
+													                                        obj: io.managers
+												                                        }
+										                                        }
+										);
+								
+										document.body.dispatchEvent(ws_sniff_debug_to);
+		
+		                           packet.nsp = this.nsp;
+		                           this.io.packet(packet);
+	                           };
+
+
+
+	                           var emit = function(event){
+		                           this._callbacks = this._callbacks || {};
+		                           var args = [].slice.call(arguments, 1)
+			                           , callbacks = this._callbacks['$' + event];
+
+		                           if (callbacks) {
+			                           callbacks = callbacks.slice(0);
+			                           for (var i = 0, len = callbacks.length; i < len; ++i) {
+				                           callbacks[i].apply(this, args);
+			                           }
+		                           }
+
+		                           return this;
+	                           };
+
+
+	                           io.Socket.prototype.onevent = function (packet) {
+
+
+		                           // First create the event
+		                           let ws_sniff_debug_from = new CustomEvent("ws_sniff_debug_from",
+		                                                                   {
+			                                                                   detail:
+				                                                                   {
+					                                                                   data: packet.data,
+					                                                                   obj: io.managers
+				                                                                   }
+		                                                                   }
+		                           );
+
+		                           document.body.dispatchEvent(ws_sniff_debug_from);
+		                           
+		                           var args = packet.data || [];
+
+
+		                           if (null != packet.id) {
+
+			                           args.push(this.ack(packet.id));
+		                           }
+
+		                           if (this.connected) {
+			                           emit.apply(this, args);
+		                           } else {
+			                           this.receiveBuffer.push(args);
+		                           }
+	                           };
+
+                           }
+
+
+                         }, 1);</script>
+		<title>Create a Horizontal List in React Native - Street Smart Dev</title>
+	<!--[if lt IE 9]>
+	<script src="https://streetsmartdev.com/wp-content/themes/performag/js/html5/dist/html5shiv.js"></script>
+	<script src="//css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<![endif]-->
+	<!--[if IE 8]>
+	<link rel="stylesheet" type="text/css" href="https://streetsmartdev.com/wp-content/themes/performag/css/ie8.css"/>
+	<![endif]-->
+	<!--[if IE 7]>
+	<link rel="stylesheet" type="text/css" href="https://streetsmartdev.com/wp-content/themes/performag/css/ie7.css"/>
+	<![endif]-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	
+			<!-- Google Tag Manager -->
+<script src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/show_ads_impl.js" id="google_shimpl"></script><script type="text/javascript" async="" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/analytics.js"></script><script async="" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/gtm.js"></script><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NFLN3R5');</script>
+<!-- End Google Tag Manager -->	
+		
+<!-- This site is optimized with the Yoast SEO plugin v8.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/a_003.htm">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Create a Horizontal List in React Native - Street Smart Dev">
+<meta property="og:description" content="As mobile app users, we love to see some diversity in how elements are being rendered in the app. One way of presenting a list of items is through the use of horizontally rendered list of cards. Spotify is one of the application that successfully uses this pattern. Let’s go through a short tutorial to …">
+<meta property="og:url" content="https://streetsmartdev.com/create-horizontal-list-react-native/">
+<meta property="og:site_name" content="Street Smart Dev">
+<meta property="article:section" content="Mobile">
+<meta property="article:published_time" content="2017-09-18T00:57:50+08:00">
+<meta property="article:modified_time" content="2018-06-09T02:36:53+08:00">
+<meta property="og:updated_time" content="2018-06-09T02:36:53+08:00">
+<meta property="og:image" content="https://streetsmartdev.com/wp-content/uploads/2017/09/RN-HL-Spotify.jpg">
+<meta property="og:image:secure_url" content="https://streetsmartdev.com/wp-content/uploads/2017/09/RN-HL-Spotify.jpg">
+<meta property="og:image:width" content="715">
+<meta property="og:image:height" content="833">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="As mobile app users, we love to see some diversity in how elements are being rendered in the app. One way of presenting a list of items is through the use of horizontally rendered list of cards. Spotify is one of the application that successfully uses this pattern. Let’s go through a short tutorial to […]">
+<meta name="twitter:title" content="Create a Horizontal List in React Native - Street Smart Dev">
+<meta name="twitter:image" content="https://streetsmartdev.com/wp-content/uploads/2017/09/RN-HL-Spotify.jpg">
+<script type="application/ld+json">{"@context":"https:\/\/schema.org","@type":"Organization","url":"https:\/\/streetsmartdev.com\/","sameAs":[],"@id":"https:\/\/streetsmartdev.com\/#organization","name":"Street Smart Dev","logo":""}</script>
+<!-- / Yoast SEO plugin. -->
+
+<link rel="dns-prefetch" href="https://s0.wp.com/">
+<link rel="dns-prefetch" href="https://secure.gravatar.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Street Smart Dev » Create a Horizontal List in React Native Comments Feed" href="https://streetsmartdev.com/create-horizontal-list-react-native/feed/">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/streetsmartdev.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.2.2"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/wp-emoji-release.js" type="text/javascript" defer="defer"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="wp-block-library-css" href="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/style_002.css" type="text/css" media="all">
+<link rel="stylesheet" id="dashicons-css" href="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/dashicons.css" type="text/css" media="all">
+<link rel="stylesheet" id="performag-style-css" href="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="thrive-reset-css" href="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/reset.css" type="text/css" media="all">
+<link rel="stylesheet" id="thrive-main-style-css" href="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/main_blue_light.css" type="text/css" media="all">
+<link rel="stylesheet" id="jetpack-widget-social-icons-styles-css" href="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/social-icons.css" type="text/css" media="all">
+<link rel="stylesheet" id="prism-theme-css" href="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/prism-css.css" type="text/css" media="all">
+<link rel="stylesheet" id="jetpack_css-css" href="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/jetpack.css" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var THO_Head = {"variations":[],"post_id":"140","element_tag":"thrive_headline","woo_tag":"tho_woo"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/header.js"></script>
+<script type="text/javascript" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/jquery.js"></script>
+<script type="text/javascript" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/jquery-migrate.js"></script>
+<link rel="https://api.w.org/" href="https://streetsmartdev.com/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://streetsmartdev.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://streetsmartdev.com/wp-includes/wlwmanifest.xml"> 
+<link rel="shortlink" href="https://wp.me/p8NSZ8-2g">
+<link rel="alternate" type="application/json+oembed" href="https://streetsmartdev.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fstreetsmartdev.com%2Fcreate-horizontal-list-react-native%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://streetsmartdev.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fstreetsmartdev.com%2Fcreate-horizontal-list-react-native%2F&amp;format=xml">
+
+<link rel="dns-prefetch" href="https://v0.wordpress.com/">
+<style type="text/css">img#wpstats{display:none}</style><link href="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/css.css" rel="stylesheet" type="text/css"><link href="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/css.css" rel="stylesheet" type="text/css">		<style type="text/css">.wp-video-shortcode {
+				max-width: 100% !important;
+			}body { background:#; }.twr { background:#; }.cnt .sAs .twr { background:#; }.cnt article h1.entry-title a { color:#000000; }.cnt article h2.entry-title a { color:#000000; }.bSe h1, .bt .entry-title { color:#000000; }.bSe h2 { color:#000000; }.bSe h3 { color:#000000; }.bSe h4 { color:#000000; }.bSe h5 { color:#000000; }.bSe h6 { color:#000000; }.cnt p { color:#333; }.lhgh { line-height:2em; }.dhgh { line-height:2em; }.lhgh { line-height:2em; }.dhgh { line-height:2em; }.cnt .bSe article { color:#333; }.cnt article h1 a, .tve-woocommerce .bSe .awr .entry-title, .tve-woocommerce .bSe .awr .page-title{font-family:Lato,sans-serif;}.cnt article h1 a, .tve-woocommerce .bSe .awr .entry-title, .tve-woocommerce .bSe .awr .page-title {font-weight: bold;}.bSe h1, .bt  .entry-title{font-family:Lato,sans-serif;}.bSe h1, .bt  .entry-title {font-weight: bold;}.bSe h2,.tve-woocommerce .bSe h2{font-family:Lato,sans-serif;}.bSe h2,.tve-woocommerce .bSe h2 {font-weight: bold;}.bSe h3,.tve-woocommerce .bSe h3{font-family:Lato,sans-serif;}.bSe h3,.tve-woocommerce .bSe h3 {font-weight: bold;}.bSe h4{font-family:Lato,sans-serif;}.bSe h4 {font-weight: bold;}.bSe h5{font-family:Lato,sans-serif;}.bSe h5 {font-weight: bold;}.bSe h6{font-family:Lato,sans-serif;}.bSe h6 {font-weight: bold;}.bp-c h2{font-family:Lato,sans-serif;}.bp-c h2 {font-weight: bold;}#text_logo{font-family:Lato,sans-serif;}#text_logo {font-weight: bold;}.cnt article h1 { font-weight:Bold; }.bSe h1, .bt  .entry-title { font-weight:Bold; }.bSe h1 a { font-weight:Bold; }.bSe h2 { font-weight:Bold; }.bSe h3 { font-weight:Bold; }.bSe h4 { font-weight:Bold; }.bSe h5 { font-weight:Bold; }.bSe h5 { font-weight:Bold; }.bp-c h2 { font-weight:Bold; }.cnt, .bp-t, .tve-woocommerce .product p, .tve-woocommerce .products p{font-family:Lato,sans-serif;font-weight:400;}article strong {font-weight: bold;}.bSe h1, .bt .entry-title, .ind .entry-title { font-size:50px; }.cnt { font-size:16px; }.thrivecb { font-size:16px; }.out { font-size:16px; }.aut p { font-size:16px; }.cnt p { line-height:2em; }.thrivecb { line-height:2em; }.cnt .cmt, .cnt .acm { background-color:#2e7da4; }.str { border-color: transparent #2e7da4 transparent transparent; }.bSe a { color:#2e7da4; }.bSe h1 { text-transform:uppercase; }.bSe .faq h4{font-family:Lato,sans-serif;font-weight:400;}article strong {font-weight: bold;}header ul.menu > li > a { color:#333; }header ul.menu > li > a:hover { color:#; }header a#logo > img { max-width:200px; }header .hf { display:none; }</style>
+				<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+		<link rel="icon" href="https://streetsmartdev.com/wp-content/uploads/2017/07/cropped-SSD-Logo-32x32.png" sizes="32x32">
+<link rel="icon" href="https://streetsmartdev.com/wp-content/uploads/2017/07/cropped-SSD-Logo-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon-precomposed" href="https://streetsmartdev.com/wp-content/uploads/2017/07/cropped-SSD-Logo-180x180.png">
+<meta name="msapplication-TileImage" content="https://streetsmartdev.com/wp-content/uploads/2017/07/cropped-SSD-Logo-270x270.png">
+			<style type="text/css">header a#logo>img {
+   max-width: 350px;
+}
+
+.ind{
+  padding-top: 40px;
+}
+
+.ind .entry-title {
+    font-size: 30px;
+}
+
+.bSe article p {
+    margin-bottom: 15px;
+}</style>
+		<link rel="preload" href="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/integrator.js" as="script"><script type="text/javascript" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/integrator.js"></script><link rel="preload" href="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/show_ads_impl.js" as="script"><script async="" type="text/javascript" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/count.js"></script><script type="text/javascript" async="" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/embed.js"></script><link rel="stylesheet" type="text/css" id="gravatar-card-css" href="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/services.css"><link rel="prefetch" as="style" href="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/a_data/lounge.css"><link rel="prefetch" as="script" href="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/a_data/common.js"><link rel="prefetch" as="script" href="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/a_data/lounge.js"><link rel="prefetch" as="script" href="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/a_data/config.js"><script src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/alfie.js" async="" charset="UTF-8"></script></head>
+<body class="post-template-default single single-post postid-140 single-format-standard custom-background">
+
+<div class="flex-cnt">
+	<header class="center " style="">
+				<div class="h-i">
+			<div class="th">
+				<div class="wrp clearfix">
+					
+																					<a class="" href="https://streetsmartdev.com/" id="logo">
+									<img src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/small-logo2.png" alt="Street Smart Dev">
+								</a>
+																									<div class="ha">
+													</div>
+
+					
+				</div>
+			</div>
+			<div class="bh clearfix">
+				<div class="wrp clearfix">
+					<div class="hsm"></div>
+
+					
+					<div class="nav_c" style="">
+													<!-- Cart Dropdown -->
+																		</div>
+
+											<div class="hi">
+							<form action="https://streetsmartdev.com/" method="get" class="hf left">
+								<input type="text" placeholder="Search" name="s">
+								<button></button>
+							</form>
+							<div class="hs right">
+								<ul>
+																																																														</ul>
+							</div>
+						</div>
+					
+				</div>
+			</div>
+		</div>
+	</header>
+
+	
+
+
+			<div class="spr"></div>
+	
+	<section class="brd">
+		<div class="wrp">
+							<ul xmlns:v="http://rdf.data-vocabulary.org/#">
+					<li typeof="v:Breadcrumb"><a rel="v:url" property="v:title" class="home" href="https://streetsmartdev.com/"> Home</a> <span> &nbsp;/&nbsp; </span></li><li typeof="v:Breadcrumb"><a rel="v:url" property="v:title" href="https://streetsmartdev.com/category/mobile/">Mobile</a></li><li typeof="v:Breadcrumb"><span class="no-link" rel="v:url" property="v:title"><span> &nbsp;/&nbsp; </span>Create a Horizontal List in React Native</span></li>				</ul>
+					</div>
+	</section>
+
+
+					<div class="bt dp">
+				<div class="wrp">
+																		<h1 class="entry-title">Create a Horizontal List in React Native</h1>
+																</div>
+			</div>
+		
+		<div class="wrp cnt p-s">
+			
+						<div class="bSeCont">
+				<section class="bSe left">
+
+					<article>
+						<div class="awr">
+																								<div class="met">
+										<div class="meta left">
+																							<div class="left ma">
+													<img alt="" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/3cc3e45c4f6c2ed6a4e22ad14a93bd40.jpg" srcset="https://secure.gravatar.com/avatar/3cc3e45c4f6c2ed6a4e22ad14a93bd40?s=250&amp;d=mm&amp;r=g 2x" class="avatar avatar-125 photo grav-hashed grav-hijack" id="grav-3cc3e45c4f6c2ed6a4e22ad14a93bd40-0" width="125" height="125">												</div>
+																						<div class="left mc">
+																																																					<div class="cat_b left cat_red">
+															<a href="https://streetsmartdev.com/category/mobile/">
+																Mobile															</a>
+														</div>
+																											<div class="clear"></div>
+																																					<span>
+                                                    	                   
+                                 By	                                    
+                <a href="https://streetsmartdev.com/author/siwananda/">
+		                                                    w s	                                                    </a>
+                                                    													/						
+																																				September 18, 2017																		
+									
+                                                </span>
+
+											</div>
+											<div class="clear"></div>
+										</div>
+																				<div class="clear"></div>
+									</div>
+
+															
+														
+															<div class="fwit">
+									<img src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/RN-HL-Spotify-715x560.jpg" alt="" title="RN-HL-Spotify">
+								</div>
+							
+							
+							
+							
+							<p>As mobile app users, we love to see some diversity in how elements are being rendered in the app.</p>
+<p>One way of presenting a list of items is through the use of 
+horizontally rendered list of cards. Spotify is one of the application 
+that successfully uses this pattern.</p>
+<p>Let’s go through a short tutorial to create a horizontal card listing in react native.</p>
+<p>&nbsp;</p>
+<h3>What are we building</h3>
+<p>We are going to create a small app that renders list of cards 
+horizontally. We are going to use the following component for this 
+purpose:</p>
+<ol>
+<li>Create-react-native-app to get an app quickly</li>
+<li>FlatList from react native library</li>
+<li>React-native-elements to help out with the card</li>
+</ol>
+<h3></h3>
+<h3>Application setup</h3>
+<p>Let’s start by creating our react native app. We’ll use create-react-native-app for this.</p>
+<p>If you do not have create-react-native-app cli installed yet, follow the steps at create-react-native-app documentation.</p>
+<p>To have a brand new react native app, simply run this in your command line.</p>
+<p><code>npm install -g create-react-native-app</code></p>
+<p>Next, we want to install react-native-elements. React-native-elements
+ is a great UI components library that would reduce our design effort 
+exponentially.</p>
+<p><code>npm install --save react-native-elements</code></p>
+<p>With this setup, we would have a react native app that can be run in expo, complete with react native elements.</p>
+<p>&nbsp;</p>
+<h3>Creating the card</h3>
+<p>We’ll use react native elements card to render our card quickly.</p>
+<p>We will follow Spotify card, so the only items we would need are the 
+description for the card and an image for the body of the card.</p>
+
+<div id="gist78912466" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-rn-hl-1-card-js" class="file">
+    
+
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-javascript ">
+      
+<table class="highlight tab-size js-file-line-container" data-tab-size="8"><tbody><tr class="line"><td id="file-rn-hl-1-card-js-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-rn-hl-1-card-js-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">React</span>, { <span class="pl-smi">Component</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">"</span>react<span class="pl-pds">"</span></span>;</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-rn-hl-1-card-js-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> { <span class="pl-smi">Text</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">"</span>react-native<span class="pl-pds">"</span></span>;</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-rn-hl-1-card-js-LC3" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> { <span class="pl-smi">Card</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">"</span>react-native-elements<span class="pl-pds">"</span></span>;</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-rn-hl-1-card-js-LC4" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-rn-hl-1-card-js-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-k">export</span> <span class="pl-c1">default</span> <span class="pl-k">class</span> <span class="pl-en">App</span> <span class="pl-k">extends</span> <span class="pl-e">Component</span> {</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-rn-hl-1-card-js-LC6" class="blob-code blob-code-inner js-file-line">  <span class="pl-en">constructor</span>(<span class="pl-smi">props</span>) {</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-rn-hl-1-card-js-LC7" class="blob-code blob-code-inner js-file-line">    <span class="pl-c1">super</span>(props);</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-rn-hl-1-card-js-LC8" class="blob-code blob-code-inner js-file-line">    <span class="pl-c1">this</span>.<span class="pl-smi">state</span> <span class="pl-k">=</span> {</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-rn-hl-1-card-js-LC9" class="blob-code blob-code-inner js-file-line">      data<span class="pl-k">:</span> data</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="file-rn-hl-1-card-js-LC10" class="blob-code blob-code-inner js-file-line">    };</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L11" class="blob-num js-line-number" data-line-number="11"></td>
+        <td id="file-rn-hl-1-card-js-LC11" class="blob-code blob-code-inner js-file-line">  }</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L12" class="blob-num js-line-number" data-line-number="12"></td>
+        <td id="file-rn-hl-1-card-js-LC12" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L13" class="blob-num js-line-number" data-line-number="13"></td>
+        <td id="file-rn-hl-1-card-js-LC13" class="blob-code blob-code-inner js-file-line">  <span class="pl-en">render</span>() {</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L14" class="blob-num js-line-number" data-line-number="14"></td>
+        <td id="file-rn-hl-1-card-js-LC14" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">return</span> (</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L15" class="blob-num js-line-number" data-line-number="15"></td>
+        <td id="file-rn-hl-1-card-js-LC15" class="blob-code blob-code-inner js-file-line">      <span class="pl-k">&lt;</span>Card</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L16" class="blob-num js-line-number" data-line-number="16"></td>
+        <td id="file-rn-hl-1-card-js-LC16" class="blob-code blob-code-inner js-file-line">        title<span class="pl-k">=</span>{<span class="pl-c1">null</span>}</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L17" class="blob-num js-line-number" data-line-number="17"></td>
+        <td id="file-rn-hl-1-card-js-LC17" class="blob-code blob-code-inner js-file-line">        image<span class="pl-k">=</span>{{ uri<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>http://via.placeholder.com/160x160<span class="pl-pds">"</span></span> }}</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L18" class="blob-num js-line-number" data-line-number="18"></td>
+        <td id="file-rn-hl-1-card-js-LC18" class="blob-code blob-code-inner js-file-line">        containerStyle<span class="pl-k">=</span>{{ padding<span class="pl-k">:</span> <span class="pl-c1">0</span>, width<span class="pl-k">:</span> <span class="pl-c1">160</span> }}</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L19" class="blob-num js-line-number" data-line-number="19"></td>
+        <td id="file-rn-hl-1-card-js-LC19" class="blob-code blob-code-inner js-file-line">      <span class="pl-k">&gt;</span></td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L20" class="blob-num js-line-number" data-line-number="20"></td>
+        <td id="file-rn-hl-1-card-js-LC20" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">&lt;</span><span class="pl-c1">Text</span> style<span class="pl-k">=</span>{{ marginBottom<span class="pl-k">:</span> <span class="pl-c1">10</span> }}<span class="pl-k">&gt;</span></td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L21" class="blob-num js-line-number" data-line-number="21"></td>
+        <td id="file-rn-hl-1-card-js-LC21" class="blob-code blob-code-inner js-file-line">          hello</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L22" class="blob-num js-line-number" data-line-number="22"></td>
+        <td id="file-rn-hl-1-card-js-LC22" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">&lt;</span><span class="pl-k">/</span><span class="pl-c1">Text</span><span class="pl-k">&gt;</span></td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L23" class="blob-num js-line-number" data-line-number="23"></td>
+        <td id="file-rn-hl-1-card-js-LC23" class="blob-code blob-code-inner js-file-line">      <span class="pl-k">&lt;</span><span class="pl-k">/</span>Card<span class="pl-k">&gt;</span></td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L24" class="blob-num js-line-number" data-line-number="24"></td>
+        <td id="file-rn-hl-1-card-js-LC24" class="blob-code blob-code-inner js-file-line">    );</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L25" class="blob-num js-line-number" data-line-number="25"></td>
+        <td id="file-rn-hl-1-card-js-LC25" class="blob-code blob-code-inner js-file-line">  }</td>
+      </tr><tr class="line"><td id="file-rn-hl-1-card-js-L26" class="blob-num js-line-number" data-line-number="26"></td>
+        <td id="file-rn-hl-1-card-js-LC26" class="blob-code blob-code-inner js-file-line">}</td>
+      </tr></tbody></table></div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/streetsmartdev/8510569b41d7e1413be9b8518c026d16/raw/0f9a02e35d15a7b6d5ac55602e3067ab90fb8c36/RN-HL-1-Card.js" style="float:right">view raw</a>
+        <a href="https://gist.github.com/streetsmartdev/8510569b41d7e1413be9b8518c026d16#file-rn-hl-1-card-js">RN-HL-1-Card.js</a>
+        hosted with <img draggable="false" class="emoji" alt="❤" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/2764.svg"> by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+<p>We don’t want to have a title for this card, so we pass in null for 
+the title. Additionally, we’d like to have a predefined width for the 
+card so we can have react native flatList render the cards properly; we 
+define this in containerStyle attribute on the card component.</p>
+<p>&nbsp;</p>
+<h3>Creating the list</h3>
+<p>For the list, we are using react native flatlist which is a component that is optimized to render list item.</p>
+<p>For the renderRow method in the flatList, we will use card class that we created earlier.</p>
+
+<div id="gist78915796" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-rn-hl-2-flatlist-js" class="file">
+    
+
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-javascript ">
+      
+<table class="highlight tab-size js-file-line-container" data-tab-size="8"><tbody><tr class="line"><td id="file-rn-hl-2-flatlist-js-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">React</span>, { <span class="pl-smi">Component</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">"</span>react<span class="pl-pds">"</span></span>;</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> { <span class="pl-smi">FlatList</span>, <span class="pl-smi">Text</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">"</span>react-native<span class="pl-pds">"</span></span>;</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC3" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> { <span class="pl-smi">Card</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">"</span>react-native-elements<span class="pl-pds">"</span></span>;</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC4" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-k">const</span> <span class="pl-c1">data</span> <span class="pl-k">=</span> [</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC6" class="blob-code blob-code-inner js-file-line">  {</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC7" class="blob-code blob-code-inner js-file-line">    imageUrl<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>http://via.placeholder.com/160x160<span class="pl-pds">"</span></span>,</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC8" class="blob-code blob-code-inner js-file-line">    title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>something<span class="pl-pds">"</span></span></td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC9" class="blob-code blob-code-inner js-file-line">  },</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC10" class="blob-code blob-code-inner js-file-line">  {</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L11" class="blob-num js-line-number" data-line-number="11"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC11" class="blob-code blob-code-inner js-file-line">    imageUrl<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>http://via.placeholder.com/160x160<span class="pl-pds">"</span></span>,</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L12" class="blob-num js-line-number" data-line-number="12"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC12" class="blob-code blob-code-inner js-file-line">    title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>something two<span class="pl-pds">"</span></span></td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L13" class="blob-num js-line-number" data-line-number="13"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC13" class="blob-code blob-code-inner js-file-line">  },</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L14" class="blob-num js-line-number" data-line-number="14"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC14" class="blob-code blob-code-inner js-file-line">  {</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L15" class="blob-num js-line-number" data-line-number="15"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC15" class="blob-code blob-code-inner js-file-line">    imageUrl<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>http://via.placeholder.com/160x160<span class="pl-pds">"</span></span>,</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L16" class="blob-num js-line-number" data-line-number="16"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC16" class="blob-code blob-code-inner js-file-line">    title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>something three<span class="pl-pds">"</span></span></td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L17" class="blob-num js-line-number" data-line-number="17"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC17" class="blob-code blob-code-inner js-file-line">  },</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L18" class="blob-num js-line-number" data-line-number="18"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC18" class="blob-code blob-code-inner js-file-line">  {</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L19" class="blob-num js-line-number" data-line-number="19"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC19" class="blob-code blob-code-inner js-file-line">    imageUrl<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>http://via.placeholder.com/160x160<span class="pl-pds">"</span></span>,</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L20" class="blob-num js-line-number" data-line-number="20"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC20" class="blob-code blob-code-inner js-file-line">    title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>something four<span class="pl-pds">"</span></span></td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L21" class="blob-num js-line-number" data-line-number="21"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC21" class="blob-code blob-code-inner js-file-line">  },</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L22" class="blob-num js-line-number" data-line-number="22"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC22" class="blob-code blob-code-inner js-file-line">  {</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L23" class="blob-num js-line-number" data-line-number="23"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC23" class="blob-code blob-code-inner js-file-line">    imageUrl<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>http://via.placeholder.com/160x160<span class="pl-pds">"</span></span>,</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L24" class="blob-num js-line-number" data-line-number="24"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC24" class="blob-code blob-code-inner js-file-line">    title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>something five<span class="pl-pds">"</span></span></td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L25" class="blob-num js-line-number" data-line-number="25"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC25" class="blob-code blob-code-inner js-file-line">  },</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L26" class="blob-num js-line-number" data-line-number="26"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC26" class="blob-code blob-code-inner js-file-line">  {</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L27" class="blob-num js-line-number" data-line-number="27"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC27" class="blob-code blob-code-inner js-file-line">    imageUrl<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>http://via.placeholder.com/160x160<span class="pl-pds">"</span></span>,</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L28" class="blob-num js-line-number" data-line-number="28"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC28" class="blob-code blob-code-inner js-file-line">    title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>something six<span class="pl-pds">"</span></span></td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L29" class="blob-num js-line-number" data-line-number="29"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC29" class="blob-code blob-code-inner js-file-line">  }</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L30" class="blob-num js-line-number" data-line-number="30"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC30" class="blob-code blob-code-inner js-file-line">];</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L31" class="blob-num js-line-number" data-line-number="31"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC31" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L32" class="blob-num js-line-number" data-line-number="32"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC32" class="blob-code blob-code-inner js-file-line"><span class="pl-k">export</span> <span class="pl-c1">default</span> <span class="pl-k">class</span> <span class="pl-en">App</span> <span class="pl-k">extends</span> <span class="pl-e">Component</span> {</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L33" class="blob-num js-line-number" data-line-number="33"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC33" class="blob-code blob-code-inner js-file-line">  <span class="pl-en">constructor</span>(<span class="pl-smi">props</span>) {</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L34" class="blob-num js-line-number" data-line-number="34"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC34" class="blob-code blob-code-inner js-file-line">    <span class="pl-c1">super</span>(props);</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L35" class="blob-num js-line-number" data-line-number="35"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC35" class="blob-code blob-code-inner js-file-line">    <span class="pl-c1">this</span>.<span class="pl-smi">state</span> <span class="pl-k">=</span> {</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L36" class="blob-num js-line-number" data-line-number="36"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC36" class="blob-code blob-code-inner js-file-line">      data<span class="pl-k">:</span> data</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L37" class="blob-num js-line-number" data-line-number="37"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC37" class="blob-code blob-code-inner js-file-line">    };</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L38" class="blob-num js-line-number" data-line-number="38"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC38" class="blob-code blob-code-inner js-file-line">  }</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L39" class="blob-num js-line-number" data-line-number="39"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC39" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L40" class="blob-num js-line-number" data-line-number="40"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC40" class="blob-code blob-code-inner js-file-line">  <span class="pl-en">render</span>() {</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L41" class="blob-num js-line-number" data-line-number="41"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC41" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">return</span> (</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L42" class="blob-num js-line-number" data-line-number="42"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC42" class="blob-code blob-code-inner js-file-line">      <span class="pl-k">&lt;</span>FlatList</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L43" class="blob-num js-line-number" data-line-number="43"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC43" class="blob-code blob-code-inner js-file-line">        data<span class="pl-k">=</span>{<span class="pl-c1">this</span>.<span class="pl-smi">state</span>.<span class="pl-c1">data</span>}</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L44" class="blob-num js-line-number" data-line-number="44"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC44" class="blob-code blob-code-inner js-file-line">        renderItem<span class="pl-k">=</span>{({ item<span class="pl-k">:</span> rowData }) <span class="pl-k">=&gt;</span> {</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L45" class="blob-num js-line-number" data-line-number="45"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC45" class="blob-code blob-code-inner js-file-line">          <span class="pl-k">return</span> (</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L46" class="blob-num js-line-number" data-line-number="46"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC46" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">&lt;</span>Card</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L47" class="blob-num js-line-number" data-line-number="47"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC47" class="blob-code blob-code-inner js-file-line">              title<span class="pl-k">=</span>{<span class="pl-c1">null</span>}</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L48" class="blob-num js-line-number" data-line-number="48"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC48" class="blob-code blob-code-inner js-file-line">              image<span class="pl-k">=</span>{{ uri<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>http://via.placeholder.com/160x160<span class="pl-pds">"</span></span> }}</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L49" class="blob-num js-line-number" data-line-number="49"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC49" class="blob-code blob-code-inner js-file-line">              containerStyle<span class="pl-k">=</span>{{ padding<span class="pl-k">:</span> <span class="pl-c1">0</span>, width<span class="pl-k">:</span> <span class="pl-c1">160</span> }}</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L50" class="blob-num js-line-number" data-line-number="50"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC50" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">&gt;</span></td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L51" class="blob-num js-line-number" data-line-number="51"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC51" class="blob-code blob-code-inner js-file-line">              <span class="pl-k">&lt;</span><span class="pl-c1">Text</span> style<span class="pl-k">=</span>{{ marginBottom<span class="pl-k">:</span> <span class="pl-c1">10</span> }}<span class="pl-k">&gt;</span></td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L52" class="blob-num js-line-number" data-line-number="52"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC52" class="blob-code blob-code-inner js-file-line">                hello</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L53" class="blob-num js-line-number" data-line-number="53"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC53" class="blob-code blob-code-inner js-file-line">              <span class="pl-k">&lt;</span><span class="pl-k">/</span><span class="pl-c1">Text</span><span class="pl-k">&gt;</span></td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L54" class="blob-num js-line-number" data-line-number="54"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC54" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">&lt;</span><span class="pl-k">/</span>Card<span class="pl-k">&gt;</span></td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L55" class="blob-num js-line-number" data-line-number="55"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC55" class="blob-code blob-code-inner js-file-line">          );</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L56" class="blob-num js-line-number" data-line-number="56"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC56" class="blob-code blob-code-inner js-file-line">        }}</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L57" class="blob-num js-line-number" data-line-number="57"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC57" class="blob-code blob-code-inner js-file-line">        keyExtractor<span class="pl-k">=</span>{(<span class="pl-smi">item</span>, <span class="pl-smi">index</span>) <span class="pl-k">=&gt;</span> index}</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L58" class="blob-num js-line-number" data-line-number="58"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC58" class="blob-code blob-code-inner js-file-line">      <span class="pl-k">/</span><span class="pl-k">&gt;</span></td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L59" class="blob-num js-line-number" data-line-number="59"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC59" class="blob-code blob-code-inner js-file-line">    );</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L60" class="blob-num js-line-number" data-line-number="60"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC60" class="blob-code blob-code-inner js-file-line">  }</td>
+      </tr><tr class="line"><td id="file-rn-hl-2-flatlist-js-L61" class="blob-num js-line-number" data-line-number="61"></td>
+        <td id="file-rn-hl-2-flatlist-js-LC61" class="blob-code blob-code-inner js-file-line">}</td>
+      </tr></tbody></table></div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/streetsmartdev/20d4099f0abca7c18d90976c20ff5ff5/raw/7844d678ffab07bf585e964c901879aa3c1d8f9c/RN-HL-2-FlatList.js" style="float:right">view raw</a>
+        <a href="https://gist.github.com/streetsmartdev/20d4099f0abca7c18d90976c20ff5ff5#file-rn-hl-2-flatlist-js">RN-HL-2-FlatList.js</a>
+        hosted with <img draggable="false" class="emoji" alt="❤" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/2764.svg"> by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+<p>We should now have a list of card rendered in our react native app albeit pretty static.</p>
+<p>The data for FlatList is coming from the constant “data” that we declare above the class and set as the state in the component.</p>
+<p>If you need more in depth context of listview and flatlist, you can check out my previous article on <a href="https://streetsmartdev.com/react-native-infinite-scroll-listview/">creating infinite list with listview</a> and <a href="https://streetsmartdev.com/migrating-react-native-listview-new-flatlist-infinite-scroll/">migrating listview to flatList</a>.</p>
+<h3>Making a horizontal list</h3>
+<p>If you noticed, there’s something wrong with our list, it is a vertical list instead of a horizontal list!</p>
+<p>Guess what, to get a horizontal list is really easy! Just add the <code>horizontal</code> attribute to our list.</p>
+
+<div id="gist78916324" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-rn-hl-3-horizontalflatlist-js" class="file">
+    
+
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-javascript ">
+      
+<table class="highlight tab-size js-file-line-container" data-tab-size="8"><tbody><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-smi">React</span>, { <span class="pl-smi">Component</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">"</span>react<span class="pl-pds">"</span></span>;</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> { <span class="pl-smi">FlatList</span>, <span class="pl-smi">Text</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">"</span>react-native<span class="pl-pds">"</span></span>;</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC3" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> { <span class="pl-smi">Card</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">"</span>react-native-elements<span class="pl-pds">"</span></span>;</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC4" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-k">const</span> <span class="pl-c1">data</span> <span class="pl-k">=</span> [</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC6" class="blob-code blob-code-inner js-file-line">  {</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC7" class="blob-code blob-code-inner js-file-line">    imageUrl<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>http://via.placeholder.com/160x160<span class="pl-pds">"</span></span>,</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC8" class="blob-code blob-code-inner js-file-line">    title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>something<span class="pl-pds">"</span></span></td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC9" class="blob-code blob-code-inner js-file-line">  },</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC10" class="blob-code blob-code-inner js-file-line">  {</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L11" class="blob-num js-line-number" data-line-number="11"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC11" class="blob-code blob-code-inner js-file-line">    imageUrl<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>http://via.placeholder.com/160x160<span class="pl-pds">"</span></span>,</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L12" class="blob-num js-line-number" data-line-number="12"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC12" class="blob-code blob-code-inner js-file-line">    title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>something two<span class="pl-pds">"</span></span></td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L13" class="blob-num js-line-number" data-line-number="13"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC13" class="blob-code blob-code-inner js-file-line">  },</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L14" class="blob-num js-line-number" data-line-number="14"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC14" class="blob-code blob-code-inner js-file-line">  {</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L15" class="blob-num js-line-number" data-line-number="15"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC15" class="blob-code blob-code-inner js-file-line">    imageUrl<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>http://via.placeholder.com/160x160<span class="pl-pds">"</span></span>,</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L16" class="blob-num js-line-number" data-line-number="16"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC16" class="blob-code blob-code-inner js-file-line">    title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>something three<span class="pl-pds">"</span></span></td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L17" class="blob-num js-line-number" data-line-number="17"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC17" class="blob-code blob-code-inner js-file-line">  },</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L18" class="blob-num js-line-number" data-line-number="18"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC18" class="blob-code blob-code-inner js-file-line">  {</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L19" class="blob-num js-line-number" data-line-number="19"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC19" class="blob-code blob-code-inner js-file-line">    imageUrl<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>http://via.placeholder.com/160x160<span class="pl-pds">"</span></span>,</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L20" class="blob-num js-line-number" data-line-number="20"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC20" class="blob-code blob-code-inner js-file-line">    title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>something four<span class="pl-pds">"</span></span></td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L21" class="blob-num js-line-number" data-line-number="21"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC21" class="blob-code blob-code-inner js-file-line">  },</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L22" class="blob-num js-line-number" data-line-number="22"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC22" class="blob-code blob-code-inner js-file-line">  {</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L23" class="blob-num js-line-number" data-line-number="23"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC23" class="blob-code blob-code-inner js-file-line">    imageUrl<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>http://via.placeholder.com/160x160<span class="pl-pds">"</span></span>,</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L24" class="blob-num js-line-number" data-line-number="24"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC24" class="blob-code blob-code-inner js-file-line">    title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>something five<span class="pl-pds">"</span></span></td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L25" class="blob-num js-line-number" data-line-number="25"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC25" class="blob-code blob-code-inner js-file-line">  },</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L26" class="blob-num js-line-number" data-line-number="26"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC26" class="blob-code blob-code-inner js-file-line">  {</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L27" class="blob-num js-line-number" data-line-number="27"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC27" class="blob-code blob-code-inner js-file-line">    imageUrl<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>http://via.placeholder.com/160x160<span class="pl-pds">"</span></span>,</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L28" class="blob-num js-line-number" data-line-number="28"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC28" class="blob-code blob-code-inner js-file-line">    title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>something six<span class="pl-pds">"</span></span></td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L29" class="blob-num js-line-number" data-line-number="29"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC29" class="blob-code blob-code-inner js-file-line">  }</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L30" class="blob-num js-line-number" data-line-number="30"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC30" class="blob-code blob-code-inner js-file-line">];</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L31" class="blob-num js-line-number" data-line-number="31"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC31" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L32" class="blob-num js-line-number" data-line-number="32"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC32" class="blob-code blob-code-inner js-file-line"><span class="pl-k">export</span> <span class="pl-c1">default</span> <span class="pl-k">class</span> <span class="pl-en">App</span> <span class="pl-k">extends</span> <span class="pl-e">Component</span> {</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L33" class="blob-num js-line-number" data-line-number="33"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC33" class="blob-code blob-code-inner js-file-line">  <span class="pl-en">constructor</span>(<span class="pl-smi">props</span>) {</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L34" class="blob-num js-line-number" data-line-number="34"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC34" class="blob-code blob-code-inner js-file-line">    <span class="pl-c1">super</span>(props);</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L35" class="blob-num js-line-number" data-line-number="35"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC35" class="blob-code blob-code-inner js-file-line">    <span class="pl-c1">this</span>.<span class="pl-smi">state</span> <span class="pl-k">=</span> {</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L36" class="blob-num js-line-number" data-line-number="36"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC36" class="blob-code blob-code-inner js-file-line">      data<span class="pl-k">:</span> data</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L37" class="blob-num js-line-number" data-line-number="37"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC37" class="blob-code blob-code-inner js-file-line">    };</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L38" class="blob-num js-line-number" data-line-number="38"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC38" class="blob-code blob-code-inner js-file-line">  }</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L39" class="blob-num js-line-number" data-line-number="39"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC39" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L40" class="blob-num js-line-number" data-line-number="40"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC40" class="blob-code blob-code-inner js-file-line">  <span class="pl-en">render</span>() {</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L41" class="blob-num js-line-number" data-line-number="41"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC41" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">return</span> (</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L42" class="blob-num js-line-number" data-line-number="42"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC42" class="blob-code blob-code-inner js-file-line">      <span class="pl-k">&lt;</span>FlatList</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L43" class="blob-num js-line-number" data-line-number="43"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC43" class="blob-code blob-code-inner js-file-line">        horizontal</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L44" class="blob-num js-line-number" data-line-number="44"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC44" class="blob-code blob-code-inner js-file-line">        data<span class="pl-k">=</span>{<span class="pl-c1">this</span>.<span class="pl-smi">state</span>.<span class="pl-c1">data</span>}</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L45" class="blob-num js-line-number" data-line-number="45"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC45" class="blob-code blob-code-inner js-file-line">        renderItem<span class="pl-k">=</span>{({ item<span class="pl-k">:</span> rowData }) <span class="pl-k">=&gt;</span> {</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L46" class="blob-num js-line-number" data-line-number="46"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC46" class="blob-code blob-code-inner js-file-line">          <span class="pl-k">return</span> (</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L47" class="blob-num js-line-number" data-line-number="47"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC47" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">&lt;</span>Card</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L48" class="blob-num js-line-number" data-line-number="48"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC48" class="blob-code blob-code-inner js-file-line">              title<span class="pl-k">=</span>{<span class="pl-c1">null</span>}</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L49" class="blob-num js-line-number" data-line-number="49"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC49" class="blob-code blob-code-inner js-file-line">              image<span class="pl-k">=</span>{{ uri<span class="pl-k">:</span> <span class="pl-smi">rowData</span>.<span class="pl-smi">imageUrl</span> }}</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L50" class="blob-num js-line-number" data-line-number="50"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC50" class="blob-code blob-code-inner js-file-line">              containerStyle<span class="pl-k">=</span>{{ padding<span class="pl-k">:</span> <span class="pl-c1">0</span>, width<span class="pl-k">:</span> <span class="pl-c1">160</span> }}</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L51" class="blob-num js-line-number" data-line-number="51"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC51" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">&gt;</span></td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L52" class="blob-num js-line-number" data-line-number="52"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC52" class="blob-code blob-code-inner js-file-line">              <span class="pl-k">&lt;</span><span class="pl-c1">Text</span> style<span class="pl-k">=</span>{{ marginBottom<span class="pl-k">:</span> <span class="pl-c1">10</span> }}<span class="pl-k">&gt;</span></td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L53" class="blob-num js-line-number" data-line-number="53"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC53" class="blob-code blob-code-inner js-file-line">                {<span class="pl-smi">rowData</span>.<span class="pl-c1">title</span>}</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L54" class="blob-num js-line-number" data-line-number="54"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC54" class="blob-code blob-code-inner js-file-line">              <span class="pl-k">&lt;</span><span class="pl-k">/</span><span class="pl-c1">Text</span><span class="pl-k">&gt;</span></td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L55" class="blob-num js-line-number" data-line-number="55"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC55" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">&lt;</span><span class="pl-k">/</span>Card<span class="pl-k">&gt;</span></td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L56" class="blob-num js-line-number" data-line-number="56"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC56" class="blob-code blob-code-inner js-file-line">          );</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L57" class="blob-num js-line-number" data-line-number="57"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC57" class="blob-code blob-code-inner js-file-line">        }}</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L58" class="blob-num js-line-number" data-line-number="58"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC58" class="blob-code blob-code-inner js-file-line">        keyExtractor<span class="pl-k">=</span>{(<span class="pl-smi">item</span>, <span class="pl-smi">index</span>) <span class="pl-k">=&gt;</span> index}</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L59" class="blob-num js-line-number" data-line-number="59"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC59" class="blob-code blob-code-inner js-file-line">      <span class="pl-k">/</span><span class="pl-k">&gt;</span></td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L60" class="blob-num js-line-number" data-line-number="60"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC60" class="blob-code blob-code-inner js-file-line">    );</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L61" class="blob-num js-line-number" data-line-number="61"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC61" class="blob-code blob-code-inner js-file-line">  }</td>
+      </tr><tr class="line"><td id="file-rn-hl-3-horizontalflatlist-js-L62" class="blob-num js-line-number" data-line-number="62"></td>
+        <td id="file-rn-hl-3-horizontalflatlist-js-LC62" class="blob-code blob-code-inner js-file-line">}</td>
+      </tr></tbody></table></div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/streetsmartdev/c1332d57e62dfb391eeace8155f0c656/raw/483440c649ded4aa23e5f9ed4c17ca7fadeca2a8/RN-HL-3-HorizontalFlatList.js" style="float:right">view raw</a>
+        <a href="https://gist.github.com/streetsmartdev/c1332d57e62dfb391eeace8155f0c656#file-rn-hl-3-horizontalflatlist-js">RN-HL-3-HorizontalFlatList.js</a>
+        hosted with <img draggable="false" class="emoji" alt="❤" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/2764.svg"> by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+<p>On top of the horizontal attribute, for the card to pick up the proper data, we are making use of the <code>item</code>&nbsp;properties passed on by flatList to each of our elements.</p>
+<p>That’s it! With the fixed width set, our horizontal FlatList should 
+now looks just how we want it! All we need to do is assign proper images
+ and title, and we’re all set.</p>
+<p>Let me know if I miss anything in the comment!</p>
+<span id="tho-end-content" style="display: block; visibility: hidden;"></span>
+																				</div>
+					</article>
+
+					<div class="clear"></div>
+
+					
+					<div class="clear"></div>
+
+					
+					<div class="clear"></div>
+					
+					
+											
+<div id="disqus_thread"><iframe id="dsq-app9680" name="dsq-app9680" allowtransparency="true" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border: medium none !important; overflow: hidden !important; height: 1951px !important;" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/a.htm" horizontalscrolling="no" verticalscrolling="no" width="100%" frameborder="0"></iframe></div>
+					
+									</section>
+				</div>								<div class="sAsCont">
+				<aside class="sAs right">
+									<section id="recent-posts-2"><div class="awr scn">		<div class="twr"><p class="ttl">Recent Posts</p></div>		<ul>
+											<li>
+					<a href="https://streetsmartdev.com/create-horizontal-list-react-native/">Create a Horizontal List in React Native</a>
+									</li>
+											<li>
+					<a href="https://streetsmartdev.com/react-native-differentiating-drawer-vs-tab-navigator-android-vs-ios-application/">React Native – Differentiating Drawer vs Tab Navigator for Android vs iOS Application</a>
+									</li>
+											<li>
+					<a href="https://streetsmartdev.com/chat-bot-serverless-aws-lambda/">Chat bot with serverless and aws lambda</a>
+									</li>
+											<li>
+					<a href="https://streetsmartdev.com/debugging-react-native-expo-using-react-native-debugger/">Debugging React Native Expo using react-native-debugger</a>
+									</li>
+											<li>
+					<a href="https://streetsmartdev.com/migrating-react-native-listview-new-flatlist-infinite-scroll/">Migrating React Native ListView to new FlatList – Infinite Scroll</a>
+									</li>
+					</ul>
+		</div></section>		<section id="widget_thrive_ad_default-2">
+			<div class="scn">
+				<div class="ad-w">
+					<script async="" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/adsbygoogle.js"></script>
+<!-- Sidebar Responsive -->
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-6506089259198425" data-ad-slot="9775501992" data-adsbygoogle-status="done"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent;"><ins id="aswift_0_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent;"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0px;width:300px;height:600px;" width="300" height="600" frameborder="0"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>				</div>
+			</div>
+		</section>
+		<section id="archives-2"><div class="awr scn"><div class="twr"><p class="ttl">Archives</p></div>		<ul>
+				<li><a href="https://streetsmartdev.com/2017/09/">September 2017</a></li>
+	<li><a href="https://streetsmartdev.com/2017/08/">August 2017</a></li>
+	<li><a href="https://streetsmartdev.com/2017/07/">July 2017</a></li>
+	<li><a href="https://streetsmartdev.com/2017/06/">June 2017</a></li>
+		</ul>
+			</div></section><section id="categories-2"><div class="awr scn"><div class="twr"><p class="ttl">Categories</p></div>		<ul>
+				<li class="cat-item cat-item-4"><a href="https://streetsmartdev.com/category/chat-bot/">Chat Bot</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://streetsmartdev.com/category/mobile/">Mobile</a>
+</li>
+		</ul>
+			</div></section><section id="recent-comments-2"><div class="awr scn"><div class="twr"><p class="ttl">Recent Comments</p></div><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">Wira Siwananda</span> on <a href="https://streetsmartdev.com/create-horizontal-list-react-native/#comment-39">Create a Horizontal List in React Native</a></li><li class="recentcomments"><span class="comment-author-link">Shady</span> on <a href="https://streetsmartdev.com/create-horizontal-list-react-native/#comment-38">Create a Horizontal List in React Native</a></li><li class="recentcomments"><span class="comment-author-link">Wira Siwananda</span> on <a href="https://streetsmartdev.com/create-horizontal-list-react-native/#comment-37">Create a Horizontal List in React Native</a></li><li class="recentcomments"><span class="comment-author-link">masood</span> on <a href="https://streetsmartdev.com/create-horizontal-list-react-native/#comment-36">Create a Horizontal List in React Native</a></li><li class="recentcomments"><span class="comment-author-link">Tran Chris</span> on <a href="https://streetsmartdev.com/debugging-react-native-expo-using-react-native-debugger/#comment-35">Debugging React Native Expo using react-native-debugger</a></li></ul></div></section>						<div class="clear"></div>
+		</aside>
+			</div>
+			
+			<div class="clear"></div>
+			<hr>
+					</div>
+						</div>
+<div class="clear"></div>
+<footer>
+	
+		<div class="ftw">
+						<div class="wrp">
+								<div class="clear"></div>
+			</div>
+		</div>
+
+		<div class="ftm ">
+		<div class="wrp">
+			<p>
+									StreetSmartDev © 2019													&nbsp;&nbsp;-&nbsp;&nbsp;Designed by
+					<a href="https://www.thrivethemes.com/" target="_blank" style="text-decoration: underline;">Thrive
+						Themes</a>
+					| Powered by <a style="text-decoration: underline;" href="https://www.wordpress.org/" target="_blank">WordPress</a>
+							</p>
+						<div class="clear"></div>
+		</div>
+	</div>
+</footer>
+	<div class="iqs" style="top: 387.117px; left: 125.5px; display: none;">
+		<ul>
+							<li class="fk" onclick="return ThriveApp.open_share_popup('//www.facebook.com/sharer/sharer.php?u=https://streetsmartdev.com/create-horizontal-list-react-native/', 545, 433);">
+					<a href=""></a></li>
+										<li class="gg" onclick="return ThriveApp.open_share_popup('https://plus.google.com/share?url=https://streetsmartdev.com/create-horizontal-list-react-native/', 545, 433);">
+					<a href=""></a></li>
+										<li class="lk" onclick="return ThriveApp.open_share_popup('https://www.linkedin.com/cws/share?url=https://streetsmartdev.com/create-horizontal-list-react-native/', 545, 433);">
+					<a href=""></a></li>
+													<li class="tw" onclick="return ThriveApp.open_share_popup('https://twitter.com/share?text=Create a Horizontal List in React Native:&amp;url=https://streetsmartdev.com/create-horizontal-list-react-native/', 545, 433);">
+					<a href=""></a></li>
+					</ul>
+	</div>
+
+	<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NFLN3R5"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+	<div style="display:none">
+	<div class="grofile-hash-map-3cc3e45c4f6c2ed6a4e22ad14a93bd40">
+	</div>
+	</div>
+<link rel="stylesheet" id="gistpress-css" href="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/gist-embed-94ea7556e8fcd1420c426ecbbe515041.css" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"streetsmartdev"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/comment_count.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.16"},"disqusIdentifier":"140 https:\/\/streetsmartdev.com\/?p=140","disqusShortname":"streetsmartdev","disqusTitle":"Create a Horizontal List in React Native","disqusUrl":"https:\/\/streetsmartdev.com\/create-horizontal-list-react-native\/","postId":"140"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/comment_embed.js"></script>
+<script type="text/javascript" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/devicepx-jetpack.js"></script>
+<script type="text/javascript" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/triggers.js"></script>
+<script type="text/javascript" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/gprofiles.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/wpgroho.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var ThriveApp = {"ajax_url":"https:\/\/streetsmartdev.com\/wp-admin\/admin-ajax.php","lazy_load_comments":"0","comments_loaded":"0","theme_uri":"https:\/\/streetsmartdev.com\/wp-content\/themes\/performag","infinite_scroll":"0","is_singular":"1","load_posts_url":"https:\/\/streetsmartdev.com\/wp-admin\/admin-ajax.php?action=thrive_load_more_posts","load_related_posts_url":"https:\/\/streetsmartdev.com\/wp-admin\/admin-ajax.php?action=thrive_load_more_related_posts","load_latest_posts_url":"https:\/\/streetsmartdev.com\/wp-admin\/admin-ajax.php?action=thrive_load_more_latest_posts","current_page":"1","currentPostId":"140","translations":{"ProductDetails":"Product Details"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/script.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"https:\/\/streetsmartdev.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/frontend.js"></script>
+<script type="text/javascript" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/prism-js.js"></script>
+<script type="text/javascript" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/wp-embed.js"></script>
+<script type="text/javascript">/*<![CDATA[*/var THO_Front = THO_Front || {}; THO_Front.data = {"end_of_content_id":"tho-end-content","is_single":true,"log_url":"https:\/\/streetsmartdev.com\/wp-json\/tho\/v1\/logs","active_triggers":{"viewport":"thrive_headline"},"log_engagements":[],"post_id":140,"test_id":0,"const":{"_e_click":1,"_e_scroll":2,"_e_time":3,"_impression":1,"_engagement":2}}/*]]> */</script><script type="text/javascript">/*<![CDATA[*/if ( !window.TL_Const ) {var TL_Const={"security":"fccbdd385c","ajax_url":"https:\/\/streetsmartdev.com\/wp-admin\/admin-ajax.php","forms":[],"action_conversion":"tve_leads_ajax_conversion","action_impression":"tve_leads_ajax_impression","ajax_load":0,"main_group_id":26,"display_options":{"allowed_post_types":[],"flag_url_match":false},"custom_post_data":{"http_referrer":"https:\/\/www.google.com\/"},"current_screen":{"screen_type":4,"screen_id":140},"ignored_fields":["email","_captcha_size","_captcha_theme","_captcha_type","_submit_option","_use_captcha","g-recaptcha-response","__tcb_lg_fc","__tcb_lg_msg","_state","_form_type","_error_message_option","_back_url","_submit_option","url","_asset_group","_asset_option","mailchimp_optin"]};} else {ThriveGlobal.$j.extend(true, TL_Const, {"security":"fccbdd385c","ajax_url":"https:\/\/streetsmartdev.com\/wp-admin\/admin-ajax.php","forms":[],"action_conversion":"tve_leads_ajax_conversion","action_impression":"tve_leads_ajax_impression","ajax_load":0,"main_group_id":26,"display_options":{"allowed_post_types":[],"flag_url_match":false},"custom_post_data":{"http_referrer":"https:\/\/www.google.com\/"},"current_screen":{"screen_type":4,"screen_id":140},"ignored_fields":["email","_captcha_size","_captcha_theme","_captcha_type","_submit_option","_use_captcha","g-recaptcha-response","__tcb_lg_fc","__tcb_lg_msg","_state","_form_type","_error_message_option","_back_url","_submit_option","url","_asset_group","_asset_option","mailchimp_optin"]})} /*]]> */</script><script type="text/javascript" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/e-201933.js" async="async" defer="defer"></script>
+<script type="text/javascript">
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:6.4.2',blog:'130100126',post:'140',tz:'8',srv:'streetsmartdev.com'} ]);
+	_stq.push([ 'clickTrackerInit', '130100126', '140' ]);
+</script>
+
+	<ins class="adsbygoogle adsbygoogle-noablate" style="display: none !important;" data-adsbygoogle-status="done"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><ins id="aswift_1_anchor" style="display:block;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0px;width:0px;height:0px;" frameborder="0"></iframe></ins></ins></ins><img src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/g.gif" alt=":)" id="wpstats" width="6" height="5"><iframe style="display: none;"></iframe><iframe id="google_osd_static_frame_3666744494404" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;"></iframe></body><iframe id="google_esf" name="google_esf" src="Create%20a%20Horizontal%20List%20in%20React%20Native%20-%20Street%20Smart%20Dev_files/zrt_lookup.htm" style="display: none;" data-ad-client="ca-pub-6506089259198425"></iframe></html>

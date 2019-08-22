@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "888840726542",
+    "firebase_url": "https://radiokurd-a16f5.firebaseio.com",
+    "project_id": "radiokurd-a16f5",
+    "storage_bucket": "radiokurd-a16f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888840726542:android:b61228dcafd9bad6",
+        "android_client_info": {
+          "package_name": "com.RadioKurd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "888840726542-9rh90kr2e7gao2uo89pj0krt9lslgcoj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.RadioKurd",
+            "certificate_hash": "4d9026dcc0df0c1554f90cbd3c40a47a1f79ab57"
+          }
+        },
+        {
+          "client_id": "888840726542-ci1sp77ovv81oo2n9l15jjeqm3451v8v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ6KM5gzDW67G09CyFyF5Q2KqJT906IlQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "888840726542-ci1sp77ovv81oo2n9l15jjeqm3451v8v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

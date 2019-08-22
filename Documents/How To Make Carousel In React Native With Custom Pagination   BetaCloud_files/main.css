@@ -1,0 +1,104 @@
+.logo-white{
+    width: 250px !important;
+}
+.logo-color{
+    width:80px !important;    
+}
+
+.white_link,.white_link li,.white_link a{
+    color: #fff;
+}
+
+.entry-body iframe{
+    max-width:100%;
+}
+
+.no-padding{
+    padding: 0px !important;
+}
+
+.team-img{
+    height:270px;
+    overflow: hidden;
+}
+.working-process-details{
+    padding: 30px;
+}
+
+.mazical-panel .tab-content{
+    width: 307px;
+}
+
+.pc_only{
+    display: block;
+}
+.hire-form input {
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    height: 55px;
+    display: block;
+    width: 100%;
+    padding: 11px 0;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 27px;
+    background-color: transparent;
+    background-image: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    transition: .3s ease-in-out;
+    border: 2px solid transparent;
+    border-bottom-color: rgba(0,0,0,.1);
+}
+
+
+
+.hide{
+    display: none;
+}
+
+.hirebanner{
+    margin-top:0px;
+}
+
+.banner-full-height {
+    height: 100vh;
+    position: relative;
+    width: 100%;
+    display: block;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .mob_only{
+        display: none !important;
+    }
+    .hirebanner{
+        margin-top:170px;
+    }
+
+    .pc_only{
+        display: none;
+    }
+    .banner-full-height {
+        height: auto;
+    }
+
+    .mazical-panel{
+        margin-bottom:60
+    }
+
+    .pricing-pricing-table-single{
+        margin-top: 0px;
+    }
+
+    div#pills-tabContent {
+        padding: 0px 0px 15px;
+    }
+
+    .logo-color{
+        margin-top:-10px;
+        margin-bottom: -10px;
+    }    
+}
