@@ -1,62 +1,49 @@
 import React,{Component} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {loginFlux,RegisterFlux,homeFlux,settingFlux,homeTabs,ROOT_TABS} from './../../assets/constants';
+import {Dimensions} from 'react-native'
 import Register from './Register';
-import {Scene ,Router, Stack,Tabs} from 'react-native-router-flux';
 import Login from './login';
-import Home from './../Pages/Home';
-import Setting from './../Pages/Setting';
-import DrawerLayout from './../DrawerLayout/Drawer';
-import {Drawer} from 'react-native';
+import {TabView,SceneMap, TabBar} from 'react-native-tab-view';
 
 export default class Index extends Component{
+    state = {
+        index: 0,
+        routes: [
+          { key: 'signIn', title: 'SignIn',icon:<TabIcon iconName="md-home" selected={true}></TabIcon> },
+          { key: 'signUp', title: 'SignUp' },
+        ],
+      };
+
         render(){    
                 return (
-                    <Router>
-                            <Stack >
-                                <Tabs key={ROOT_TABS} tabs={true} showLabel={false} showIcon={true} swipeEnabled={true} 
-                                    tabBarPosition="top"  hideNavBar tabBarStyle={{backgroundColor:'$mainColor'}}> 
-                                        <Scene key={loginFlux} component={Login} 
-                                            hideNavBar={true}
-                                            
-                                            title="Login" 
-                                            icon={TabIcon}
-                                            size={30}
-                                            iconName="home"
-                                            back={false} initial></Scene>
-                                        <Scene key={RegisterFlux} 
-                                            component={Register} 
-                                            hideNavBar={true}
-                                            icon={TabIcon}
-                                            size={30}
-                                            iconName="home"
-                                            back={false}></Scene>
-                            </Tabs>
-                        <Drawer key={homeTabs}
-                            hideNavBar={true}
-                            hideTabBar={true}
-                            contentComponent={DrawerLayout}>
-                                <Tabs  tabs={true} swipeEnabled={true} tabBarPosition="bottom" hideNavBar={true}>
-                                        <Scene key={homeFlux}
-                                                    title="Home"
-                                                    icon={TabIcon}
-                                                    component={Home}
-                                                    size={30}
-                                                    iconName="home"
-                                                    back={false} initial></Scene>
-                                        <Scene key={settingFlux}
-                                                    title="Setting"
-                                                    icon={TabIcon}
-                                                    component={Setting}
-                                                    size={30}
-                                                    iconName="home"
-                                                    back={false}></Scene>
-                                </Tabs>
-                         </Drawer>
-                        </Stack>
-                    </Router>
+                    <TabView navigationState={this.state}
+                    swipeEnabled={true}
+                    renderScene={SceneMap({
+                        signIn:Login,
+                        signUp:Register
+                    })}
+                    renderTabBar={props=>
+                        <TabBar {...props}
+                                indicatorStyle={{ backgroundColor: 'white' }}
+                                style={{ backgroundColor: 'pink' }}
+                                renderLabel=""
+                                renderIcon={({route})=>{
+                                    if(route.key==="signUp"){
+                                        return <TabIcon iconName="circle"></TabIcon>
+                                    }else{
+                                        return <TabIcon iconName="circle"></TabIcon>
+                                    }
+                                }}
+                        ></TabBar>
+                    }
+                    onIndexChange={index => this.setState({ index })}
+                    initialLayout={{ width: Dimensions.get('window').width }}></TabView>
                     );
-        }               
+        } 
+        
+        _renderTabBar(){
+
+        }
   }
 
 

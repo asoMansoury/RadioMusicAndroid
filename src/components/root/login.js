@@ -1,8 +1,9 @@
 import React,{Component} from 'react';
-import {Text, View, TextInput, SafeAreaView,Image,Dimensions,Platform,Button as ButtonNative} from 'react-native';
+import {Text, View, TextInput, SafeAreaView,Image,Dimensions,Platform} from 'react-native';
 import {loginPageStyle} from './../../assets/styles/index';
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 import Carousel from 'react-native-snap-carousel';
+import {homeFlux, homeTabs,settingFlux, initAppFlux} from './../../assets/constants'
 import {connect} from 'react-redux';
 import {material} from 'react-native-typography';
 import {Button} from 'react-native-elements';
@@ -46,6 +47,7 @@ class Login extends Component{
       });
 
       this._renderItem = this._renderItem.bind(this);
+      this.onLoginPress = this.onLoginPress.bind(this);
 
 }
 _renderItem({item,index}){
@@ -64,7 +66,9 @@ let ImageUri = item.Image;
     const heightWindow = Platform.OS ==='ios' ?
                    Dimensions.get('window').height :
                    require('react-native-extra-dimensions-android').get('REAL_WINDOW_HEIGHT');
+                   
     return(
+                
                 <SafeAreaView  style={loginPageStyle.container}>
                   
                 <View style={{flex:.5,borderBottomEndRadius:30}}>
@@ -79,31 +83,29 @@ let ImageUri = item.Image;
                         />
                 </View>
                 <View style={loginPageStyle.loginScreenContainer}>
-                <ModalLogin ref={ref=>this.ModalLogin=ref}></ModalLogin>
                           <View style={loginPageStyle.loginFormView}>
                               <Text style={[loginPageStyle.logoText,material.display1]}>Radio</Text>
                                   {/* <Icon name="ios-search" size={20} style={{padding:10}}></Icon> */}
                                   <TextInput placeholder="Username" placeholderColor="#e0e0e0" style={loginPageStyle.loginFormTextInput} />
                                   <TextInput placeholder="Password" placeholderColor="#e0e0e0" style={loginPageStyle.loginFormTextInput} secureTextEntry={true}/>
                                   <Button
-                                  buttonStyle={[loginPageStyle.loginButton,{width:"90%"}]}
-                                  color='$iconColor'
-                                  onPress={() => this.onLoginPress()}
-                                  title="Login"
-                                  />
+                                      buttonStyle={[loginPageStyle.loginButton,{width:"90%"}]}
+                                      color='$iconColor'
+                                      onPress={() => Actions.replace(homeFlux)}
+                                      title="Login"/>
                                   <Button 
-                                  buttonStyle={{width:"90%",marginTop:6,marginLeft:20}}
-                                  type="outline"
-                                  onPress={() => this.ModalLogin.refs.modal1.open()}
-                                  title="Forgot Password">
-                                  </Button>
+                                      buttonStyle={{width:"90%",marginTop:6,marginLeft:20}}
+                                      type="outline"
+                                      onPress={() => this.ModalLogin.refs.modal1.open()}
+                                      title="Forgot Password">
+                                      </Button>
                                   {/* <GoogleSigninButton
                                       style={{ width: 312, height: 48 }}
                                       size={GoogleSigninButton.Size.Wide}
                                       color={GoogleSigninButton.Color.Light}
                                       onPress={this._signIn}
                                       /> */}
-                                  
+                           <ModalLogin ref={ref=>this.ModalLogin=ref}></ModalLogin>       
                           </View>
                   </View>
                   
@@ -114,7 +116,7 @@ let ImageUri = item.Image;
   
 
   onLoginPress() {
-    Actions.reset("HOME_TABS");
+     Actions.replace(homeTabs);
   }
 
   _signIn = async () => {
@@ -164,9 +166,6 @@ let ImageUri = item.Image;
       }
     };
 
-}
-
- class LoginExtended extends Component{
 }
 
 const mapStateToProps = state =>{
