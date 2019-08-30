@@ -25,6 +25,7 @@ export default class App extends Component{
     super(props);
 }
 
+
   renderLoading  = ()=>{
     <View>
       <ActivityIndicator size="large"></ActivityIndicator>
@@ -75,7 +76,7 @@ export default class App extends Component{
                                 hideNavBar={true}
                                 hideTabBar={true}
                                 contentComponent={DrawerLayout}>
-                                  <Tabs tabBarPosition="bottom" tabs={true} swipeEnabled={true}>
+                                  <Tabs tabBarPosition="bottom"  swipeEnabled={true}>
                                             <Scene key={homeFlux}
                                                         title="Home"
                                                         icon={TabIcon}

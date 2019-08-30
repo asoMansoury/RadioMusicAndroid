@@ -3,11 +3,10 @@ import  {View,Text,StyleSheet,Image} from 'react-native';
 import Index from './components/root/Index';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import {Actions} from 'react-native-router-flux';
-import {initAppFlux,RegisterFlux,IndexPageFlux} from './assets/constants';
+import {IndexPageFlux} from './assets/constants';
 import {initialAppStyle} from './assets/styles/index';
 import {connect} from 'react-redux';
 import {setIsFirstTime} from './redux/actions';
-import Login from './components/root/login';
 
 const slides = [
   {

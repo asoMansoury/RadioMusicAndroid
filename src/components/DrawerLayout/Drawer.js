@@ -1,10 +1,35 @@
 import React,{Component} from 'react';
 import {View,Text, Item, Icon} from 'native-base';
-import {Image} from 'react-native';
+import {Image,BackHandler,BackAndroid,ToastAndroid} from 'react-native';
 import {darwerLayout} from './../../assets/styles/index';
 import { Actions } from 'react-native-router-flux';
+var backButtongPressedOnceToExit = false;
 
 export default class DrawerLayout extends Component{
+
+
+    componentWillMount(){
+        BackHandler.addEventListener('hardwareBackPress',this.onBackPress.bind(this))
+      }
+  
+      onBackPress(){
+        if(backButtongPressedOnceToExit===true){
+            BackHandler.exitApp();
+            return false;
+        }else{
+            backButtongPressedOnceToExit=true;
+            ToastAndroid.show("Press Back Button again to exit",ToastAndroid.SHORT);
+            setTimeout(() => {
+                backButtongPressedOnceToExit=false
+            }, 2000);
+            return true;
+        }
+      }
+  
+      componentWillUnmount(){
+        BackHandler.addEventListener('hardwareBackPress',this.onBackPress.bind(this))
+      }
+
     render(){
         return(
             <View style={darwerLayout.container}>

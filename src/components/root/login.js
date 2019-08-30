@@ -1,14 +1,14 @@
 import React,{Component} from 'react';
 import {Text, View, TextInput, SafeAreaView,Image,Dimensions,Platform} from 'react-native';
 import {loginPageStyle} from './../../assets/styles/index';
-import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 import Carousel from 'react-native-snap-carousel';
-import {homeFlux, homeTabs,settingFlux, initAppFlux} from './../../assets/constants'
+import {homeFlux, homeTabs} from './../../assets/constants'
 import {connect} from 'react-redux';
 import {material} from 'react-native-typography';
 import {Button} from 'react-native-elements';
 import ModalLogin from './ModalLogin';
 import { Actions} from 'react-native-router-flux';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 class Login extends Component{
 
@@ -38,13 +38,6 @@ class Login extends Component{
           Image:'./../../assets/images/3.jpg'
       }
   ]}
-      GoogleSignin.configure({
-        //It is mandatory to call this method before attempting to call signIn()
-        scopes: ['https://www.googleapis.com/auth/drive.readonly'],
-        // Repleace with your webClientId generated from Firebase console
-        webClientId:
-          '888840726542-ci1sp77ovv81oo2n9l15jjeqm3451v8v.apps.googleusercontent.com',
-      });
 
       this._renderItem = this._renderItem.bind(this);
       this.onLoginPress = this.onLoginPress.bind(this);
@@ -63,15 +56,11 @@ let ImageUri = item.Image;
 }
   render(){
     const widthWindow = Dimensions.get('window').width;
-    const heightWindow = Platform.OS ==='ios' ?
-                   Dimensions.get('window').height :
-                   require('react-native-extra-dimensions-android').get('REAL_WINDOW_HEIGHT');
-                   
     return(
                 
-                <SafeAreaView  style={loginPageStyle.container}>
+          <SafeAreaView  style={loginPageStyle.container}>
                   
-                <View style={{flex:.5,borderBottomEndRadius:30}}>
+              <View style={{flex:.5,borderBottomEndRadius:30}}>
                     <Carousel
                             autoplay={true}
                             ref={ref => this.carousel = ref}
@@ -99,16 +88,10 @@ let ImageUri = item.Image;
                                       onPress={() => this.ModalLogin.refs.modal1.open()}
                                       title="Forgot Password">
                                       </Button>
-                                  {/* <GoogleSigninButton
-                                      style={{ width: 312, height: 48 }}
-                                      size={GoogleSigninButton.Size.Wide}
-                                      color={GoogleSigninButton.Color.Light}
-                                      onPress={this._signIn}
-                                      /> */}
-                           <ModalLogin ref={ref=>this.ModalLogin=ref}></ModalLogin>       
-                          </View>
+                           <ModalLogin ref={ref=>this.ModalLogin=ref}></ModalLogin> 
+                           <KeyboardSpacer></KeyboardSpacer>      
+                          </View>    
                   </View>
-                  
             </SafeAreaView>
     )
   }
@@ -116,55 +99,8 @@ let ImageUri = item.Image;
   
 
   onLoginPress() {
-     Actions.replace(homeTabs);
+     Actions.reset(homeTabs);
   }
-
-  _signIn = async () => {
-      //Prompts a modal to let the user sign in into your application.
-      try {
-        await GoogleSignin.hasPlayServices({
-          //Check if device has Google Play Services installed.
-          //Always resolves to true on iOS.
-          showPlayServicesUpdateDialog: true,
-        });
-        const userInfo = await GoogleSignin.signIn();
-        console.log('User Info --> ', userInfo);
-        this.setState({ userInfo: userInfo });
-      } catch (error) {
-        console.log('Message', error.message);
-        if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-          console.log('User Cancelled the Login Flow');
-        } else if (error.code === statusCodes.IN_PROGRESS) {
-          console.log('Signing In');
-        } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-          console.log('Play Services Not Available or Outdated');
-        } else {
-          console.log('Some Other Error Happened',error);
-        }
-      }
-    };
-
-    _getCurrentUser = async () => {
-      //May be called eg. in the componentDidMount of your main component.
-      //This method returns the current user
-      //if they already signed in and null otherwise.
-      try {
-        const userInfo = await GoogleSignin.signInSilently();
-        this.setState({ userInfo });
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    _signOut = async () => {
-      //Remove user session from the device.
-      try {
-        await GoogleSignin.revokeAccess();
-        await GoogleSignin.signOut();
-        this.setState({ user: null }); // Remove the user from your app's state as well
-      } catch (error) {
-        console.error(error);
-      }
-    };
 
 }
 

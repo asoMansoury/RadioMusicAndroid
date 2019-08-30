@@ -4,6 +4,7 @@ import {loginPageStyle} from './../../assets/styles/index';
 import {Button} from 'react-native-elements';
 import {View,StyleSheet,TextInput,Text} from 'react-native';
 import {material} from 'react-native-typography';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 export default class ModalLogin extends Component{
   constructor(props){
@@ -35,24 +36,26 @@ export default class ModalLogin extends Component{
                             <TextInput ref={"txtEmail"} placeholder="Email" placeholderColor="#e0e0e0" style={[loginPageStyle.loginFormTextInput,{display:this.state.isVisibleTxtEmail?'flex':'none'}]} />
                             <TextInput ref={"txtNewPassword"} placeholder="Password" placeholderColor="#e0e0e0" style={[loginPageStyle.loginFormTextInput,{display:!this.state.isVisibleTxtEmail?'flex':'none'}]} />
                             <TextInput ref={"txtNewConfirmPassword"} placeholder="Confirm Password" placeholderColor="#e0e0e0" style={[loginPageStyle.loginFormTextInput,{display:!this.state.isVisibleTxtEmail?'flex':'none'}]} />
+                            
                             <Button
-                            buttonStyle={[loginPageStyle.loginButton,{width:"90%"},{display:this.state.isVisibleTxtEmail?'flex':'none'}]}
-                            color='$iconColor'
-                            onPress={() => this.resetPasswordFunc()}
-                            title="Send Code"
-                            />
+                                buttonStyle={[loginPageStyle.loginButton,{width:"90%"},{display:this.state.isVisibleTxtEmail?'flex':'none'}]}
+                                color='$iconColor'
+                                onPress={() => this.resetPasswordFunc()}
+                                title="Send Code"
+                                />
                             <Button
-                            buttonStyle={[loginPageStyle.loginButton,{width:"90%"},{display:!this.state.isVisibleTxtEmail?'flex':'none'}]}
-                            color='$iconColor'
-                            onPress={() => this.resetPasswordFunc()}
-                            title="Confirm"
-                            />
+                                buttonStyle={[loginPageStyle.loginButton,{width:"90%"},{display:!this.state.isVisibleTxtEmail?'flex':'none'}]}
+                                color='$iconColor'
+                                onPress={() => this.resetPasswordFunc()}
+                                title="Confirm"
+                                />
                             <Button 
-                            buttonStyle={{width:"90%",marginTop:6,marginLeft:20}}
-                            type="outline"
-                            onPress={()=>this.refs.modal1.close()}
-                            title="Close">
-                            </Button>
+                                buttonStyle={{width:"90%",marginTop:6,marginLeft:20}}
+                                type="outline"
+                                onPress={()=>this.refs.modal1.close()}
+                                title="Close">
+                                </Button>
+                            <KeyboardSpacer></KeyboardSpacer>
                             
                 </View>
             </Modal>
