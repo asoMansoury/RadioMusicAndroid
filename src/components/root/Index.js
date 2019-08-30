@@ -4,7 +4,7 @@ import {Dimensions,View} from 'react-native'
 import Register from './Register';
 import Login from './login';
 import {TabView,SceneMap, TabBar} from 'react-native-tab-view';
-
+import {Router,Scene,Drawer,Tabs} from 'react-native-router-flux';
 export default class Index extends Component{
     state = {
         index: 0,
@@ -17,7 +17,8 @@ export default class Index extends Component{
         render(){    
                 return (
                       <TabView navigationState={this.state}
-                            swipeEnabled={true}
+                            swipeEnabled={false}
+                            tabBarPosition="top"
                             renderScene={SceneMap({
                                 signIn:Login,
                                 signUp:Register

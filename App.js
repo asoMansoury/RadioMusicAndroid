@@ -76,7 +76,7 @@ export default class App extends Component{
                                 hideNavBar={true}
                                 hideTabBar={true}
                                 contentComponent={DrawerLayout}>
-                                  <Tabs tabBarPosition="bottom"  swipeEnabled={true}>
+                                  <Tabs  swipeEnabled={true} tabBarPosition="bottom">
                                             <Scene key={homeFlux}
                                                         title="Home"
                                                         icon={TabIcon}
