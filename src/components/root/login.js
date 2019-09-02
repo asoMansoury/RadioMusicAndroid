@@ -10,7 +10,9 @@ import ModalLogin from './ModalLogin';
 import { Actions} from 'react-native-router-flux';
 import axios from 'axios';
 import {baseServer} from './../ConstApi';
+import {Hoshi} from 'react-native-textinput-effects';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
+import Dropdownalert from 'react-native-dropdownalert';
 
 class Login extends Component{
 
@@ -52,7 +54,6 @@ class Login extends Component{
 
 }
 _renderItem({item,index}){
-let ImageUri = item.Image;
   return (
     <View style={{flex:1,justifyContent:'center',alignItems:'center'}}> 
         <Image
@@ -83,10 +84,9 @@ passwordChange(e){
 
   render(){
     const widthWindow = Dimensions.get('window').width;
-    return(
-                
+    return(    
           <SafeAreaView  style={loginPageStyle.container}>
-                  
+              <Dropdownalert ref={ref=>this.dropDownAlertRef=ref} zIndex={-1}></Dropdownalert>
               <View style={{flex:.5,borderBottomEndRadius:30}}>
                     <Carousel
                             autoplay={true}
@@ -95,21 +95,27 @@ passwordChange(e){
                             sliderWidth={widthWindow}
                             itemWidth={widthWindow}
                             renderItem={this._renderItem}
-                            onSnapToItem = { index => this.setState({activeIndex:index}) }
-                        />
+                            onSnapToItem = { index => this.setState({activeIndex:index}) }/>
                 </View>
                 <View style={loginPageStyle.loginScreenContainer}>
                           <View style={loginPageStyle.loginFormView}>
                               <Text style={[loginPageStyle.logoText,material.display1]}>Radio</Text>
                                   {/* <Icon name="ios-search" size={20} style={{padding:10}}></Icon> */}
-                                  <TextInput placeholder="Username" placeholderColor="#e0e0e0" 
-                                      style={loginPageStyle.loginFormTextInput} 
-                                      onChangeText={this.userNameChange}
-                                    />
-                                  <TextInput placeholder="Password" placeholderColor="#e0e0e0" 
-                                      style={loginPageStyle.loginFormTextInput} secureTextEntry={true}
-                                      onChangeText={this.passwordChange}
-                                    />
+                                  <Hoshi
+                                    label={"Username"}
+                                    borderColor={"#b76c94"}
+                                    borderHeight={3}
+                                    inputPadding={16}
+                                    onChangeText={this.userNameChange}
+                                    backgroundColor={'#F9F7F6'}
+                                  ></Hoshi>
+                                  <Hoshi
+                                    label={"Password"}
+                                    borderHeight={3}
+                                    inputPadding={16}
+                                    onChangeText={this.passwordChange}
+                                    backgroundColor={'#F9F7F6'}
+                                  ></Hoshi>
                                   <Button
                                       buttonStyle={[loginPageStyle.loginButton,{width:"90%"}]}
                                       color='$iconColor'
@@ -132,19 +138,26 @@ passwordChange(e){
   
 
   async onLoginPress() {
-     let response = await axios.post(baseServer+"/api/userapi/Login",{
-      userName: this.state.userData.userName,
-      password: this.state.userData.password
-     });
-     if(response.status===200){
-       if(response.data.isError===true){
-        ToastAndroid.show(response.data.Errors.Message,ToastAndroid.SHORT); 
+    try {
+      this.dropDownAlertRef.alertWithType('error','Error',"message");
+      const {userName,password} = this.state.userData;
+      let response = await axios.post(baseServer+"/api/userapi/Login",{
+        userName: userName,
+        password: password
+       });
+       console.log(response);
+       if(response.status===200){
+         if(response.data.isError===true){
+          ToastAndroid.show(response.data.Errors.Message,ToastAndroid.SHORT); 
+         }else{
+            Actions.reset(homeTabs);
+         }
        }else{
-          Actions.reset(homeTabs);
+          ToastAndroid.show("Connection to Server Lost",ToastAndroid.SHORT); 
        }
-     }else{
-        ToastAndroid.show("Connection to Server Lost",ToastAndroid.SHORT); 
-     }
+    } catch (error) {
+      ToastAndroid.show(error,ToastAndroid.SHORT); 
+    }
   }
 
 }

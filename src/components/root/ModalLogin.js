@@ -5,6 +5,7 @@ import {Button} from 'react-native-elements';
 import {View,StyleSheet,TextInput,Text} from 'react-native';
 import {material} from 'react-native-typography';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
+import {Hoshi} from 'react-native-textinput-effects';
 
 export default class ModalLogin extends Component{
   constructor(props){
@@ -33,10 +34,34 @@ export default class ModalLogin extends Component{
                 <View style={{flex:1}}>
                         <Text style={[loginPageStyle.logoText,material.display1]}>Reset Password</Text>
                             {/* <Icon name="ios-search" size={20} style={{padding:10}}></Icon> */}
-                            <TextInput ref={"txtEmail"} placeholder="Email" placeholderColor="#e0e0e0" style={[loginPageStyle.loginFormTextInput,{display:this.state.isVisibleTxtEmail?'flex':'none'}]} />
-                            <TextInput ref={"txtNewPassword"} placeholder="Password" placeholderColor="#e0e0e0" style={[loginPageStyle.loginFormTextInput,{display:!this.state.isVisibleTxtEmail?'flex':'none'}]} />
-                            <TextInput ref={"txtNewConfirmPassword"} placeholder="Confirm Password" placeholderColor="#e0e0e0" style={[loginPageStyle.loginFormTextInput,{display:!this.state.isVisibleTxtEmail?'flex':'none'}]} />
+                            <Hoshi
+                                    ref={"txtEmail"}
+                                    label={"Email"}
+                                    borderHeight={3}
+                                    inputPadding={16}
+                                    onChangeText={this.passwordChange}
+                                    backgroundColor={'#F9F7F6'}
+                                    style={{display:this.state.isVisibleTxtEmail?'flex':'none'}}
+                                  ></Hoshi>
+                            <Hoshi
+                                    ref={"txtNewPassword"}
+                                    label={"New Password"}
+                                    borderHeight={3}
+                                    inputPadding={16}
+                                    onChangeText={this.passwordChange}
+                                    backgroundColor={'#F9F7F6'}
+                                    style={{display:!this.state.isVisibleTxtEmail?'flex':'none'}}
+                                  ></Hoshi>
                             
+                            <Hoshi
+                                    ref={"txtNewConfirmPassword"}
+                                    label={"Confirm Password"}
+                                    borderHeight={3}
+                                    inputPadding={16}
+                                    onChangeText={this.passwordChange}
+                                    backgroundColor={'#F9F7F6'}
+                                    style={{display:!this.state.isVisibleTxtEmail?'flex':'none'}}
+                                  ></Hoshi>
                             <Button
                                 buttonStyle={[loginPageStyle.loginButton,{width:"90%"},{display:this.state.isVisibleTxtEmail?'flex':'none'}]}
                                 color='$iconColor'

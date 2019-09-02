@@ -1,10 +1,8 @@
 import React,{Component} from 'react';
-import {createFluidNavigator,Transition} from 'react-navigation-fluid-transitions';
-import { Text, View,Button,Animated, TextInput, SafeAreaView,Image,Dimensions,Icon,Easing} from 'react-native';
+import { Text, View, TextInput, SafeAreaView,Image,Dimensions,Icon,Easing} from 'react-native';
 import {loginPageStyle,registerPage,initialAppStyle} from './../../assets/styles/index';
-import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
 import Carousel from 'react-native-snap-carousel';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {Hoshi} from 'react-native-textinput-effects';
 import AppIntroSlider from 'react-native-app-intro-slider';
 
 const slides = [
@@ -97,7 +95,13 @@ class Register extends Component{
       {
         return (
           <View >
-          <TextInput placeholder="email" placeholderColor="#e0e0e0" style={loginPageStyle.loginFormTextInput} />
+            <Hoshi
+                    label={"email"}
+                    borderHeight={3}
+                    inputPadding={16}
+                    onChangeText={this.passwordChange}
+                    backgroundColor={'#F9F7F6'}
+                  ></Hoshi>
            {/* <MaterialIcons size ={30}  name='email' style={registerPage.inputIcon} /> */}
         </View>
         );
@@ -105,11 +109,23 @@ class Register extends Component{
         return (
           <View>
             <View>
-            <TextInput placeholder="password" placeholderColor="#e0e0e0" style={loginPageStyle.loginFormTextInput} />
+            <Hoshi
+                    label={"password"}
+                    borderHeight={3}
+                    inputPadding={16}
+                    onChangeText={this.passwordChange}
+                    backgroundColor={'#F9F7F6'}
+                  ></Hoshi>
               {/* <MaterialIcons size ={30}  name='vpn_key' style={registerPage.inputIcon} /> */}
         </View>
         <View>
-        <TextInput placeholder="Confirm Password" placeholderColor="#e0e0e0" style={loginPageStyle.loginFormTextInput} />
+        <Hoshi
+              label={"Confirm Password"}
+              borderHeight={3}
+              inputPadding={16}
+              onChangeText={this.passwordChange}
+              backgroundColor={'#F9F7F6'}
+            ></Hoshi>
          {/* <MaterialIcons size ={30}  name='vpn_key' style={registerPage.inputIcon} /> */}
       </View>
           </View>

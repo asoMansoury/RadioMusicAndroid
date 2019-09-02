@@ -150,7 +150,18 @@ android {
             keyPassword 'android'
         }
     }
+    signingConfigs {
+        release {
+        keyAlias = 'my-key-alias'
+            storePassword '123456'
+            keyPassword '123456'
+            storeFile file('C:\\Users\\asoPC\\Desktop\\my-upload-key.keystore')
+        }
+    }
     buildTypes {
+        all {
+            signingConfig signingConfigs.release
+        }
         debug {
             signingConfig signingConfigs.debug
         }
