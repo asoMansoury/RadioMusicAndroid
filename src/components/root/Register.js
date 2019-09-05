@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import { Text, View, TextInput, SafeAreaView,Image,Dimensions,Icon,Easing} from 'react-native';
-import {loginPageStyle,registerPage,initialAppStyle} from './../../assets/styles/index';
+import {loginPageStyle} from './../../assets/styles/index';
 import Carousel from 'react-native-snap-carousel';
 import {Hoshi} from 'react-native-textinput-effects';
 import AppIntroSlider from 'react-native-app-intro-slider';
@@ -99,6 +99,7 @@ class Register extends Component{
                     label={"email"}
                     borderHeight={3}
                     inputPadding={16}
+                    style={loginPageStyle.loginFormTextInput}
                     onChangeText={this.passwordChange}
                     backgroundColor={'#F9F7F6'}
                   ></Hoshi>
@@ -113,6 +114,7 @@ class Register extends Component{
                     label={"password"}
                     borderHeight={3}
                     inputPadding={16}
+                    style={loginPageStyle.loginFormTextInput}
                     onChangeText={this.passwordChange}
                     backgroundColor={'#F9F7F6'}
                   ></Hoshi>
@@ -123,6 +125,7 @@ class Register extends Component{
               label={"Confirm Password"}
               borderHeight={3}
               inputPadding={16}
+              style={loginPageStyle.loginFormTextInput}
               onChangeText={this.passwordChange}
               backgroundColor={'#F9F7F6'}
             ></Hoshi>

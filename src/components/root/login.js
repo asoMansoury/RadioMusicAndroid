@@ -12,7 +12,7 @@ import axios from 'axios';
 import {baseServer} from './../ConstApi';
 import {Hoshi} from 'react-native-textinput-effects';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import Dropdownalert from 'react-native-dropdownalert';
+import Dropdownalert,{CloseActionType} from 'react-native-dropdownalert';
 
 class Login extends Component{
 
@@ -86,7 +86,7 @@ passwordChange(e){
     const widthWindow = Dimensions.get('window').width;
     return(    
           <SafeAreaView  style={loginPageStyle.container}>
-              <Dropdownalert ref={ref=>this.dropDownAlertRef=ref} zIndex={-1}></Dropdownalert>
+              <Dropdownalert ref={ref=>this.dropDownAlertRef=ref} tapToCloseEnabled={true}></Dropdownalert>
               <View style={{flex:.5,borderBottomEndRadius:30}}>
                     <Carousel
                             autoplay={true}
@@ -106,6 +106,7 @@ passwordChange(e){
                                     borderColor={"#b76c94"}
                                     borderHeight={3}
                                     inputPadding={16}
+                                    style={loginPageStyle.loginFormTextInput}
                                     onChangeText={this.userNameChange}
                                     backgroundColor={'#F9F7F6'}
                                   ></Hoshi>
@@ -113,6 +114,7 @@ passwordChange(e){
                                     label={"Password"}
                                     borderHeight={3}
                                     inputPadding={16}
+                                    style={loginPageStyle.loginFormTextInput}
                                     onChangeText={this.passwordChange}
                                     backgroundColor={'#F9F7F6'}
                                   ></Hoshi>
@@ -127,10 +129,10 @@ passwordChange(e){
                                       onPress={() => this.ModalLogin.refs.modal1.open()}
                                       title="Forgot Password">
                                       </Button>
-                           <ModalLogin ref={ref=>this.ModalLogin=ref}></ModalLogin> 
-                           <KeyboardSpacer></KeyboardSpacer>      
+                           <ModalLogin ref={ref=>this.ModalLogin=ref}></ModalLogin>    
+                           
                           </View>    
-                  </View>
+                  </View>  
             </SafeAreaView>
     )
   }
@@ -139,27 +141,35 @@ passwordChange(e){
 
   async onLoginPress() {
     try {
-      this.dropDownAlertRef.alertWithType('error','Error',"message");
+      
       const {userName,password} = this.state.userData;
-      let response = await axios.post(baseServer+"/api/userapi/Login",{
-        userName: userName,
-        password: password
+      if(userName===""||password===""){
+        this.dropDownAlertRef.alertWithType('error','Required Fields',"Please Enter UserName And Password");
+        return;
+      }
+      var body = JSON.stringify({
+        userName: "2860122281",
+        password: "123456"
        });
-       console.log(response);
+      let response = await axios.post("http://localhost:53094//api/userapi/Login",{
+        userName: "2860122281",
+        password: "123456"
+       });
+       
+       this.dropDownAlertRef.alertWithType('error','Error',response);
        if(response.status===200){
          if(response.data.isError===true){
-          ToastAndroid.show(response.data.Errors.Message,ToastAndroid.SHORT); 
+          this.dropDownAlertRef.alertWithType('error','Information Error',response.data.Errors.Message);
          }else{
             Actions.reset(homeTabs);
          }
        }else{
-          ToastAndroid.show("Connection to Server Lost",ToastAndroid.SHORT); 
+          this.dropDownAlertRef.alertWithType('error','Error Connection',"Connection to Server Lost");
        }
     } catch (error) {
       ToastAndroid.show(error,ToastAndroid.SHORT); 
     }
   }
-
 }
 
 const mapStateToProps = state =>{

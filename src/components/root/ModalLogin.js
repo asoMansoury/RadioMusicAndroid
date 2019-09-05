@@ -41,7 +41,7 @@ export default class ModalLogin extends Component{
                                     inputPadding={16}
                                     onChangeText={this.passwordChange}
                                     backgroundColor={'#F9F7F6'}
-                                    style={{display:this.state.isVisibleTxtEmail?'flex':'none'}}
+                                    style={[{display:this.state.isVisibleTxtEmail?'flex':'none'}]}
                                   ></Hoshi>
                             <Hoshi
                                     ref={"txtNewPassword"}
@@ -50,7 +50,8 @@ export default class ModalLogin extends Component{
                                     inputPadding={16}
                                     onChangeText={this.passwordChange}
                                     backgroundColor={'#F9F7F6'}
-                                    style={{display:!this.state.isVisibleTxtEmail?'flex':'none'}}
+                                    style={[{display:!this.state.isVisibleTxtEmail?'flex':'none'}]}
+                                    
                                   ></Hoshi>
                             
                             <Hoshi
@@ -60,8 +61,9 @@ export default class ModalLogin extends Component{
                                     inputPadding={16}
                                     onChangeText={this.passwordChange}
                                     backgroundColor={'#F9F7F6'}
-                                    style={{display:!this.state.isVisibleTxtEmail?'flex':'none'}}
+                                    style={[{display:!this.state.isVisibleTxtEmail?'flex':'none'}]}
                                   ></Hoshi>
+                                  <KeyboardSpacer></KeyboardSpacer>
                             <Button
                                 buttonStyle={[loginPageStyle.loginButton,{width:"90%"},{display:this.state.isVisibleTxtEmail?'flex':'none'}]}
                                 color='$iconColor'
@@ -80,7 +82,6 @@ export default class ModalLogin extends Component{
                                 onPress={()=>this.refs.modal1.close()}
                                 title="Close">
                                 </Button>
-                            <KeyboardSpacer></KeyboardSpacer>
                             
                 </View>
             </Modal>

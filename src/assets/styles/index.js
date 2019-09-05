@@ -65,10 +65,10 @@ export const loginPageStyle = EStyleSheet.create({
     marginLeft:13
   },
   logoText: {
-    fontSize: 40,
-    fontWeight: "800",
-    marginTop: 40,
-    marginBottom: 30,
+    fontSize: 16,
+    fontWeight: "300",
+    marginTop: 20,
+    marginBottom: 5,
     textAlign: 'center',
   },
   loginFormView: {
